@@ -51,7 +51,7 @@ model {
   monitoring -> database "Reads from and writes to"
   analytics -> database "Reads from and writes to"
 
-# Inter-component interactions (sin relación inválida)
+# Inter-component interactions
 assets -> profiles "Gets owner details linked to a vehicle"
 payments -> iam "Validates user access based on subscription"
 analytics -> assets "Aggregates diagnostics and usage data"
