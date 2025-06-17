@@ -10,7 +10,7 @@ public class Subscription
     public DateTime EndDate { get; set; }
     public bool IsActive { get; set; }
 
-    public Subscription(int id, DateTime startDate, SubscriptionType type, DateTime endDate, bool isActive)
+    public Subscription(int id, DateTime startDate,SubscriptionType type, DateTime endDate, bool isActive)
     {
         Id = id;
         Type = type;
@@ -18,9 +18,6 @@ public class Subscription
         EndDate = endDate;
         IsActive = isActive;
     }
-    
-    
-    
 
-    // Additional properties or methods can be added as needed
+// Additional properties or methods can be added as needed
 }
