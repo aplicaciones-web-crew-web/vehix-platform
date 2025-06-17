@@ -30,10 +30,9 @@
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.11.0"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Publishing\Domain\Model\Aggregates\" />
-      <Folder Include="Publishing\Domain\Model\Commands\" />
-      <Folder Include="Publishing\Domain\Model\Entities\" />
-      <Folder Include="Publishing\Domain\Model\ValueObjects\" />
+      <Folder Include="Analytics\Domain\Model\Aggregates\" />
+      <Folder Include="Analytics\Domain\Model\Commands\" />
+      <Folder Include="Analytics\Domain\Model\Entities\" />
     </ItemGroup>
 
 </Project>
