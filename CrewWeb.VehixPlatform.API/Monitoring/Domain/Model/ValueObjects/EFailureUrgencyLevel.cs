@@ -3,7 +3,7 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 /// <summary>
 /// Represents the urgency level of a failure.
 /// </summary>
-public enum FailureUrgencyLevel
+public enum EFailureUrgencyLevel
 {
     /// <summary>
     /// Represents a critical failure that requires immediate attention.
