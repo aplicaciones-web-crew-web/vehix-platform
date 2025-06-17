@@ -2,7 +2,7 @@ namespace CrewWeb.VehixPlatform.API.Subscriptions_and_payments.Domain.Model.Valu
 
 
 public enum SubscriptionType
-{
-    Standard = 0,
+{ 
+    Standard = 0, 
     Pro = 1
 }
