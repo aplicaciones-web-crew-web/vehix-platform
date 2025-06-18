@@ -1,3 +1,3 @@
 namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 
-public record ContentTechnicalFailure(string ErrorCode, string FailureTitle, string SuggestSolution);
+public record ContentTechnicalFailure(string ObdErrorFailure, string FailureTitle, string SuggestSolution);

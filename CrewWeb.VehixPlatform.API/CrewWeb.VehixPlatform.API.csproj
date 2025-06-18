@@ -31,9 +31,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Monitoring\Application\Internal\" />
-      <Folder Include="Monitoring\Domain\Model\Aggregates\" />
-      <Folder Include="Monitoring\Domain\Model\Commands\" />
-      <Folder Include="Monitoring\Domain\Repositories\" />
       <Folder Include="Monitoring\Domain\Services\" />
       <Folder Include="Monitoring\Infrastructure\" />
       <Folder Include="Monitoring\Services\REST\" />
