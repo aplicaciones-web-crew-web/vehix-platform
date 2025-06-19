@@ -14,4 +14,5 @@ public class BadPractice(string descriptionBadPractice)
     public BadPractice(CreateBadPracticesCommand command) : this(command.DescriptionBadPractice)
     {
     }
+    
 }
