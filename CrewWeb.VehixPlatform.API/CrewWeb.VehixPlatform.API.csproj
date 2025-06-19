@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <!-- Dependency Injection related packages -->
+        <PackageReference Include="Cortex.Mediator" Version="1.6.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5"/>
         <!-- EntityFrameworkCore Database Persistence related packages -->
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5"/>
@@ -30,7 +31,9 @@
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.11.0"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Monitoring\Application\Internal\" />
+      <Folder Include="Monitoring\Application\Internal\CommandServices\" />
+      <Folder Include="Monitoring\Application\Internal\EventHandlers\" />
+      <Folder Include="Monitoring\Application\Internal\QueryServices\" />
       <Folder Include="Monitoring\Infrastructure\" />
       <Folder Include="Monitoring\Services\REST\" />
     </ItemGroup>
