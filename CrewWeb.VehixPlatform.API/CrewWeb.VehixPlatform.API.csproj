@@ -31,7 +31,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Monitoring\Application\Internal\" />
-      <Folder Include="Monitoring\Domain\Services\" />
       <Folder Include="Monitoring\Infrastructure\" />
       <Folder Include="Monitoring\Services\REST\" />
     </ItemGroup>
