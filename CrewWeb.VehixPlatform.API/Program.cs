@@ -1,8 +1,11 @@
+using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
+using Cortex.Mediator.DependencyInjection;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +43,24 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 // Add Swagger/OpenAPI support
-builder.Services.AddSwaggerGen(options => {
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "CrewWeb Vehix Platform API",
+        Version = "v1",
+        Description = "API for the CrewWeb Vehix Platform API",
+        Contact = new OpenApiContact
+        {
+            Name = "CrewWeb Team",
+            Email = "contact@crewweb.com"
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Apache 2.0",
+            Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+        },
+    });
     options.EnableAnnotations();
 });
 
@@ -48,6 +68,23 @@ builder.Services.AddSwaggerGen(options => {
 
 // Shared Bounded Context
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Monitoring Bounded Context
+// Repositories
+//builder.Services.AddScoped<IFailureRepository, FailureRepository>();
+//builder.Services.AddScoped<IOdbErrorRepository, ObdErrorRepository>();
+//builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
+// Commands Services
+// Queries Services
+
+// Add Mediator for CQRS
+builder.Services.AddCortexMediator(
+    configuration: builder.Configuration,
+    handlerAssemblyMarkerTypes: new[] { typeof(Program) }, configure: options =>
+    {
+        options.AddOpenCommandPipelineBehavior(typeof(LoggingCommandBehavior<>));
+        //options.AddDefaultBehaviors();
+    });
 
 var app = builder.Build();
 
