@@ -56,6 +56,7 @@ builder.Services.AddSwaggerGen(options =>
         Title = "CrewWeb Vehix Platform API",
         Version = "v1",
         Description = "API for the CrewWeb Vehix Platform API",
+        TermsOfService = new Uri("https://crew-web-vehix.com/tos"),
         Contact = new OpenApiContact
         {
             Name = "CrewWeb Team",
