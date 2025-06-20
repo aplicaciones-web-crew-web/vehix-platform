@@ -1,5 +1,11 @@
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
+using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
+using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
+using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
+using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -71,11 +77,19 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Monitoring Bounded Context
 // Repositories
-//builder.Services.AddScoped<IFailureRepository, FailureRepository>();
-//builder.Services.AddScoped<IOdbErrorRepository, ObdErrorRepository>();
-//builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
-// Commands Services
-// Queries Services
+builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
+builder.Services.AddScoped<IOdbErrorRepository, OdbErrorRepository>();
+builder.Services.AddScoped<IFailureRepository, FailureRepository>();
+//Commands Services
+builder.Services.AddScoped<IBadPracticeCommandService, BadPracticeCommandService>();
+builder.Services.AddScoped<IOdbErrorCommandService, OdbErrorCommandService>();
+builder.Services.AddScoped<IFailureCommandService, FailureCommandService>();
+//Queries Services
+builder.Services.AddScoped<IBadPracticeQueryService, BadPracticeQueryService>();
+builder.Services.AddScoped<IOdbErrorQueryService, OdbErrorQueryService>();
+builder.Services.AddScoped<IFailureQueryService, FailureQueryService>();
+
+builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
