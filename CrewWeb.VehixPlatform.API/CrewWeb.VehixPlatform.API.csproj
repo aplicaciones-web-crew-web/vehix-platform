@@ -33,7 +33,6 @@
     <ItemGroup>
       <Folder Include="Management\Domain\Model\Aggregates\" />
       <Folder Include="Management\Domain\Model\Commands\" />
-      <Folder Include="Management\Domain\Model\Entities\" />
       <Folder Include="Management\Domain\Model\Events\" />
       <Folder Include="Management\Domain\Model\Queries\" />
       <Folder Include="Management\Domain\Repositories\" />
