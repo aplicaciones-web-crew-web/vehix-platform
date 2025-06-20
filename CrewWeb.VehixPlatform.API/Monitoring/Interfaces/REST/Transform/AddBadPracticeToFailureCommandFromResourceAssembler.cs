@@ -5,9 +5,8 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
 
 public static class AddBadPracticeToFailureCommandFromResourceAssembler
 {
-    public static AddBadPracticeToFailureCommand ToCommandFromResource(AddBadPracticeToFailureResource resource,
-        int failureId)
+    public static AddBadPracticeToFailureCommand ToCommandFromResource(AddBadPracticeToFailureResource resource, int failureId)
     {
-        return new AddBadPracticeToFailureCommand(failureId);
+        return new AddBadPracticeToFailureCommand(resource.DescriptionBadPractice, failureId);
     }
 }

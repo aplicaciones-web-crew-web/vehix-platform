@@ -8,6 +8,6 @@ public static class AddOdbErrorToFailureCommandFromResourceAssembler
     public static AddOdbErrorToFailureCommand ToCommandFromResource(AddOdbErrorToFailureResource resource,
         int failureId)
     {
-        return new AddOdbErrorToFailureCommand(failureId);
+        return new AddOdbErrorToFailureCommand(resource.ErrorCode, resource.ErrorCodeTitle, failureId);
     }
 }

@@ -1,3 +1,3 @@
 namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Commands;
 
-public record AddBadPracticeToFailureCommand(int FailureId);
+public record AddBadPracticeToFailureCommand(string DescriptionBadPractice, int FailureId);

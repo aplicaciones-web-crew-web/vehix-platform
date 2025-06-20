@@ -17,6 +17,16 @@ public partial class Failure
     public int VehicleId { get; private set; }
 
 
+    public void AddBadPracticeToFailure(string descriptionBadPractice)
+    {
+        BadPractice = new BadPractice(descriptionBadPractice);
+    }
+
+    public void AddOdbErrorToFailure(string errorCode, string errorCodeTitle)
+    {
+        OdbError = new OdbError(errorCode, errorCodeTitle);
+    }
+
     public Failure( int obdErrorId, int badPracticeId, string suggestSolution)
     {
         OdbErrorId = obdErrorId;
