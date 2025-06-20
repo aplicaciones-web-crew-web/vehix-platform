@@ -30,19 +30,20 @@
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.11.0"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Management\Application\" />
-      <Folder Include="Management\Domain\Model\Aggregates\" />
-      <Folder Include="Management\Domain\Model\Commands\" />
-      <Folder Include="Management\Domain\Model\Entities\" />
-      <Folder Include="Management\Domain\Model\Queries\" />
+      <Folder Include="Management\Application\Internal\CommandServices\" />
+      <Folder Include="Management\Application\Internal\EventHandlers\" />
+      <Folder Include="Management\Application\Internal\QueryServices\" />
+      <Folder Include="Management\Domain\Model\Events\" />
       <Folder Include="Management\Domain\Repositories\" />
       <Folder Include="Management\Domain\Services\" />
-      <Folder Include="Management\Infrastructure\" />
-      <Folder Include="Management\Interfaces\" />
+      <Folder Include="Management\Infrastructure\Persistence\EFC\Configuration\Extensions\" />
+      <Folder Include="Management\Infrastructure\Persistence\EFC\Repositories\" />
+      <Folder Include="Management\Interfaces\REST\Transform\" />
       <Folder Include="Publishing\Domain\Model\Aggregates\" />
       <Folder Include="Publishing\Domain\Model\Commands\" />
       <Folder Include="Publishing\Domain\Model\Entities\" />
       <Folder Include="Publishing\Domain\Model\ValueObjects\" />
+      <Folder Include="Shared\Infrastructure\Mediator\Cortex\Configuration\" />
     </ItemGroup>
 
 </Project>
