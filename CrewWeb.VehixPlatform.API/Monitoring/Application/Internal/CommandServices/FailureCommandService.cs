@@ -30,4 +30,22 @@ public class FailureCommandService(
         failure.BadPractice = badPractice;
         return failure;
     }
+
+    public async Task<Failure?> Handle(AddBadPracticeToFailureCommand command)
+    {
+        var failure = await failureRepository.FindByIdAsync(command.FailureId);
+        if (failure is null) throw new Exception("Failure not found");
+        failure.AddBadPracticeToFailure(command.DescriptionBadPractice);
+        await unitOfWork.CompleteAsync();
+        return failure;
+    }
+
+    public async Task<Failure?> Handle(AddOdbErrorToFailureCommand command)
+    {
+        var failure = await failureRepository.FindByIdAsync(command.FailureId);
+        if (failure is null) throw new Exception("Failure not found");
+        failure.AddOdbErrorToFailure(command.ErrorCode, command.ErrorCodeTitle);
+        await unitOfWork.CompleteAsync();
+        return failure;
+    }
 }
