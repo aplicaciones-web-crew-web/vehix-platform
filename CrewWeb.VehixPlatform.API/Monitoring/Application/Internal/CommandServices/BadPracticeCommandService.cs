@@ -11,7 +11,7 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServi
 public class BadPracticeCommandService(IBadPracticeRepository badPracticeRepository, IUnitOfWork unitOfWork, IMediator domainEventPublisher) 
     : IBadPracticeCommandService
 {
-    public async Task<BadPractice?> Handle(CreateBadPracticesCommand command)
+    public async Task<BadPractice?> Handle(CreateBadPracticeCommand command)
     {
          var badPractice = new BadPractice(command);
          await badPracticeRepository.AddAsync(badPractice);

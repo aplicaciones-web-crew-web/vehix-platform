@@ -4,8 +4,6 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Entities;
 
 public partial class OdbError : IErrorType
 {
-
-
     public void SenToPowertrain()
     {
         ErrorType = EErrorType.Powertrain;

@@ -5,5 +5,5 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 
 public interface IBadPracticeCommandService
 {
-    public Task<BadPractice?> Handle(CreateBadPracticesCommand command);
+    public Task<BadPractice?> Handle(CreateBadPracticeCommand command);
 }
