@@ -1,3 +1,3 @@
 namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Commands;
 
-public record CreateBadPracticesCommand(string DescriptionBadPractice);
+public record CreateBadPracticeCommand(string DescriptionBadPractice);
