@@ -14,7 +14,6 @@ public class OdbErrorCreatedEventHandler : IEventHandler<OdbErrorCreatedEvent>
     {
         Console.WriteLine("Created ODB Error Code: {0}", domainEvent.ErrorCode);
         Console.WriteLine("Created ODB Error Title: {0}", domainEvent.ErrorCodeTitle);
-        Console.WriteLine("Created ODB Error Type: {0}", domainEvent.ErrorCodeType);
 
         return Task.CompletedTask;
     }

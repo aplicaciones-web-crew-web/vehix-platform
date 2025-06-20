@@ -16,4 +16,9 @@ public class FailureQueryService (IFailureRepository failureRepository) : IFailu
     {
         return await failureRepository.ListAsync();
     }
+
+    public async Task<IEnumerable<Failure>> Handle(GetAllFailuresByErrorTypeQuery query)
+    {
+        return await failureRepository.FindByErrorType(query.ErrorType);
+    }
 }

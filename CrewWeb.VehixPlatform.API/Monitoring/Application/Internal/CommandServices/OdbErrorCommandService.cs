@@ -20,7 +20,7 @@ public class OdbErrorCommandService(
         await odbErrorRepository.AddAsync(odbError);
         await unitOfWork.CompleteAsync();
         // Publish the domain event after the OdbError is created
-        await domainEventPublisher.PublishAsync(new OdbErrorCreatedEvent(odbError.ErrorCode, odbError.ErrorCodeTitle, odbError.ErrorType));
+        await domainEventPublisher.PublishAsync(new OdbErrorCreatedEvent(odbError.ErrorCode, odbError.ErrorCodeTitle));
         return odbError;
     }
 }
