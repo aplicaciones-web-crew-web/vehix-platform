@@ -5,7 +5,14 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
 
 public interface IFailureRepository : IBaseRepository<Failure>
 {
-    Task<IEnumerable<Failure>> FindByFailureIdAsync(int failureId);
+    Task<IEnumerable<Failure>> FindByErrorType(string errorType);
     
-    Task<bool> ExistsBySuggestSolutionAsync(string suggestSolution);
+    Task<IEnumerable<Failure>> FindBySuggestSolution(string suggestSolution);
+    
+    Task<IEnumerable<Failure>> FindByStatus(string status);
+    
+    Task<IEnumerable<Failure>> FindByType(string type);
+
+    
+    
 }

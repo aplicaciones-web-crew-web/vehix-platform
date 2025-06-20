@@ -8,22 +8,22 @@ public partial class OdbError : IErrorType
 
     public void SenToPowertrain()
     {
-        Type = EErrorType.Powertrain;
+        ErrorType = EErrorType.Powertrain;
     }
 
     public void SendToChassis()
     {
-        Type = EErrorType.Chassis;
+        ErrorType = EErrorType.Chassis;
 
     }
 
     public void SendToBody()
     {
-        Type = EErrorType.Body;
+        ErrorType = EErrorType.Body;
     }
 
     public void SendToNetwork()
     {
-        Type = EErrorType.Network;
+        ErrorType = EErrorType.Network;
     }
 }
