@@ -8,7 +8,7 @@ using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 
 namespace CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
 
-public class ObdErrorCommandService(
+public class OdbErrorCommandService(
     IOdbErrorRepository odbErrorRepository,
     IUnitOfWork unitOfWork,
     IMediator domainEventPublisher)
