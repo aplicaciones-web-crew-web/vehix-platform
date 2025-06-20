@@ -31,11 +31,10 @@
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.11.0"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Monitoring\Application\Internal\CommandServices\" />
       <Folder Include="Monitoring\Application\Internal\EventHandlers\" />
       <Folder Include="Monitoring\Application\Internal\QueryServices\" />
       <Folder Include="Monitoring\Infrastructure\" />
-      <Folder Include="Monitoring\Services\REST\" />
+      <Folder Include="Monitoring\Interfaces\REST\" />
     </ItemGroup>
 
 </Project>
