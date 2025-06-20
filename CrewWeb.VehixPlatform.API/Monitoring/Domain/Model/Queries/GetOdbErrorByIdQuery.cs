@@ -1,3 +1,3 @@
 namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
 
-public record GetAllObdErrorsQuery();
+public record GetOdbErrorByIdQuery(int OdbErrorId);

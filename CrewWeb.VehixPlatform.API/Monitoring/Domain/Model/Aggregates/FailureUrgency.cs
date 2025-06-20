@@ -4,7 +4,7 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Aggregates;
 
 public partial class Failure : IUrgency
 {
-    public EFailureUrgency Urgency { get; private set; }
+    public EFailureUrgency Urgency { get; protected set; }
     
     public void ChangeToCritical()
     {

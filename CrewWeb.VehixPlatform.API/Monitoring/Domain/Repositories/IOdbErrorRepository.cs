@@ -5,5 +5,4 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
 
 public interface IOdbErrorRepository : IBaseRepository<OdbError>
 {
-    Task<IEnumerable<OdbError>> FindByOdbErrorIdAsync(int odbErrorId);
 }

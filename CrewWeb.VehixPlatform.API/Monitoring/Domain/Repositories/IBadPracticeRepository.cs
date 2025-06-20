@@ -5,7 +5,5 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
 
 public interface IBadPracticeRepository : IBaseRepository<BadPractice>
 {
-    Task<IEnumerable<BadPractice>> FindByBadPracticeIdAsync(int badPracticeId);
-
 
 }

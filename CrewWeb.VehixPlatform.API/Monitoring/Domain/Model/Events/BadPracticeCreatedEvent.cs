@@ -4,5 +4,5 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Events;
 
 public class BadPracticeCreatedEvent(string descriptionBadPractice) : IEvent
 {
-    
+    public string DescriptionbadPractice { get; } = descriptionBadPractice;
 }
