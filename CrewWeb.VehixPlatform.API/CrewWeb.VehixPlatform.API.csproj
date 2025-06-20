@@ -31,8 +31,9 @@
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.11.0"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Monitoring\Infrastructure\" />
-      <Folder Include="Monitoring\Interfaces\REST\" />
+      <Folder Include="Monitoring\Infrastructure\Persistence\EFC\Repositories\" />
+      <Folder Include="Monitoring\Interfaces\REST\Resources\" />
+      <Folder Include="Monitoring\Interfaces\REST\Transform\" />
     </ItemGroup>
 
 </Project>
