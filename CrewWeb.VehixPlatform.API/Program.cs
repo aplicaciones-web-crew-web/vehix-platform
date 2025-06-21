@@ -6,6 +6,11 @@ using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.IAM.Application.Internal.CommandServices;
+using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.IAM.Domain.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -89,6 +94,16 @@ builder.Services.AddScoped<IFailureCommandService, FailureCommandService>();
 builder.Services.AddScoped<IBadPracticeQueryService, BadPracticeQueryService>();
 builder.Services.AddScoped<IOdbErrorQueryService, OdbErrorQueryService>();
 builder.Services.AddScoped<IFailureQueryService, FailureQueryService>();
+// Identity and Access Management Bounded Context
+// Repositories
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+// Commands Services
+builder.Services.AddScoped<IRoleCommandService, RoleCommandService>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+// Queries Services
+builder.Services.AddScoped<IRoleQueryService, RoleQueryService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 
 builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 
