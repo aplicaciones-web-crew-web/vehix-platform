@@ -17,14 +17,15 @@ public partial class Failure
     public int VehicleId { get; private set; }
 
 
+    public Failure(){}
     public void AddBadPracticeToFailure(string descriptionBadPractice)
     {
         BadPractice = new BadPractice(descriptionBadPractice);
     }
 
-    public void AddOdbErrorToFailure(string errorCode, string errorCodeTitle)
+    public void AddOdbErrorToFailure(string errorCode, string errorCodeTitle, string errorType)
     {
-        OdbError = new OdbError(errorCode, errorCodeTitle);
+        OdbError = new OdbError(errorCode, errorCodeTitle, errorType);
     }
 
     public Failure( int obdErrorId, int badPracticeId, string suggestSolution)

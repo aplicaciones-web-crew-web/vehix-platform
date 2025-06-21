@@ -1,6 +1,8 @@
 using System.Net.Mime;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Commands;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Resources;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +11,11 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/odberrors")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Odb Errors Endpoints")]
-
-public class OdbErrorsController (IOdbErrorCommandService odbErrorCommandService,
+public class OdbErrorsController(
+    IOdbErrorCommandService odbErrorCommandService,
     IOdbErrorQueryService odbErrorQueryService) : ControllerBase
 {
     /// <summary>
@@ -54,8 +56,8 @@ public class OdbErrorsController (IOdbErrorCommandService odbErrorCommandService
             .Select(OdbErrorResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(odbErrorResources);
     }
-    
-    
+
+
     /// <summary>
     /// Creates a new Odb Error and returns the created Odb Error resource.
     /// </summary>

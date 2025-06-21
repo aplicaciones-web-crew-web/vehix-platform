@@ -44,7 +44,7 @@ public class FailureCommandService(
     {
         var failure = await failureRepository.FindByIdAsync(command.FailureId);
         if (failure is null) throw new Exception("Failure not found");
-        failure.AddOdbErrorToFailure(command.ErrorCode, command.ErrorCodeTitle);
+        failure.AddOdbErrorToFailure(command.ErrorCode, command.ErrorCodeTitle, command.ErrorType);
         await unitOfWork.CompleteAsync();
         return failure;
     }

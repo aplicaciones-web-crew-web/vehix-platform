@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/badpractices")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Bad Practices Endpoints")]
 

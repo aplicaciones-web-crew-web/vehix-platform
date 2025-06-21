@@ -6,7 +6,8 @@ public class BadPractice(string descriptionBadPractice)
 {
     public int Id { get; set; }
     public string DescriptionBadPractice { get; set; } = descriptionBadPractice;
-
+    
+    
     public BadPractice() : this(string.Empty)
     {
     }

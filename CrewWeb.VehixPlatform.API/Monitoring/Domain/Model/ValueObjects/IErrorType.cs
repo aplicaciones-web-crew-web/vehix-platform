@@ -3,7 +3,7 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 public interface IErrorType
 {
     
-    void SenToPowertrain();
+    void SendToPowertrain();
 
     void SendToChassis();
     
