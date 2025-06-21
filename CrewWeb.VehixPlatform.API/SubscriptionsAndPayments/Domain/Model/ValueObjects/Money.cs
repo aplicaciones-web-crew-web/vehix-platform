@@ -1,4 +1,4 @@
-namespace CrewWeb.VehixPlatform.API.SubscriptionsAndPayments.Domain.Model.Entities;
+namespace CrewWeb.VehixPlatform.API.SubscriptionsAndPayments.Domain.Model.ValueObjects;
 
 public class Money
 {

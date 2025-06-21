@@ -33,6 +33,9 @@
       <Folder Include="Publishing\Domain\Model\Aggregates\" />
       <Folder Include="Publishing\Domain\Model\Commands\" />
       <Folder Include="Publishing\Domain\Model\Entities\" />
+      <Folder Include="SubscriptionsAndPayments\Domain\Model\Entities\" />
+      <Folder Include="SubscriptionsAndPayments\Domain\Queries\" />
+      <Folder Include="SubscriptionsAndPayments\Domain\Services\" />
     </ItemGroup>
 
 </Project>

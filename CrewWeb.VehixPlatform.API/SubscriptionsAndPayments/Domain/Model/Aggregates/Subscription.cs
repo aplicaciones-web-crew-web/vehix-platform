@@ -6,7 +6,7 @@ public class Subscription
     public SubscriptionType Type { get; }
     public DateTime StartDate { get; }
     public DateTime EndDate { get; }
-    public bool IsActive { get; }
+    public bool IsActive { get; protected set; }
 
     public Subscription(Guid id, DateTime startDate, SubscriptionType type, DateTime endDate, bool isActive)
     {
@@ -15,6 +15,21 @@ public class Subscription
         StartDate = startDate;
         EndDate = endDate;
         IsActive = isActive;
+    }
+    public void Activate()
+    {
+        if (IsActive && StartDate <= DateTime.UtcNow && EndDate >= DateTime.UtcNow)
+            throw new InvalidOperationException("Subscription is already active.");
+
+        IsActive = true;
+    }
+    
+    public void Deactivate()
+    {
+        if (!IsActive || StartDate > DateTime.UtcNow || EndDate < DateTime.UtcNow)
+            throw new InvalidOperationException("Subscription is already inactive.");
+
+        IsActive = false;
     }
     
     
