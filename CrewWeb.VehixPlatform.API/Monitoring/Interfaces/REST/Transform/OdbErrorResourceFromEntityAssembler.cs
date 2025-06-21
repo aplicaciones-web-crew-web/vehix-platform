@@ -8,6 +8,6 @@ public static class OdbErrorResourceFromEntityAssembler
 {
     public static OdbErrorResource ToResourceFromEntity(OdbError odbError)
     {
-        return new OdbErrorResource(odbError.Id, odbError.ErrorCode, odbError.ErrorCodeTitle, odbError.ErrorType);
+        return new OdbErrorResource(odbError.Id, odbError.ErrorCode, odbError.ErrorCodeTitle, odbError.ErrorTypeString);
     }
 }

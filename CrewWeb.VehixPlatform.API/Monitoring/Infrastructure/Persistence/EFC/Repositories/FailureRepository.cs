@@ -13,7 +13,7 @@ public class FailureRepository(AppDbContext context) : BaseRepository<Failure>(c
         return await Context.Set<Failure>()
             .Include(failure => failure.OdbError)
             .Include(failure => failure.BadPractice)
-            .Where(failure => failure.OdbError.ErrorType == errorType)
+            .Where(failure => failure.OdbError.ErrorTypeString == errorType)
             .ToListAsync();
     }
 

@@ -36,6 +36,8 @@ public static class ModelBuilderExtensions
         builder.Entity<OdbError>().Property(o => o.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<OdbError>().Property(o => o.ErrorCode).IsRequired().HasMaxLength(10);
         builder.Entity<OdbError>().Property(o => o.ErrorCodeTitle).IsRequired().HasMaxLength(50);
-        builder.Entity<OdbError>().Property(o => o.ErrorType).IsRequired().HasMaxLength(50);
+        builder.Entity<OdbError>().Property(o => o.Type)
+            .HasConversion<string>()
+            .IsRequired().HasMaxLength(50);
     }
 }
