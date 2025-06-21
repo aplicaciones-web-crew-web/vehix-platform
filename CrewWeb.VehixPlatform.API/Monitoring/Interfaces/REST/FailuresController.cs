@@ -13,11 +13,10 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Failure Endpoints")]
 public class FailuresController(
-    IFailureCommandService failureCommandService, 
+    IFailureCommandService failureCommandService,
     IFailureQueryService failureQueryService
-    ) : ControllerBase
+) : ControllerBase
 {
-    
     /// <summary>
     /// Get a Failure by its unique identifier.
     /// </summary>
@@ -77,43 +76,4 @@ public class FailuresController(
         var createdResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
         return CreatedAtAction(nameof(GetFailureById), new { failureId = createdResource.Id }, createdResource);
     }
-
-    /// <summary>
-    /// Post a Bad Practice to a Failure
-    /// </summary>
-    /// <param name="resource"></param>
-    /// <param name="failureId"></param>
-    /// <returns></returns>
-    [HttpPost("{failureId:int}/badPractices")]
-    public async Task<IActionResult> AddBadPracticeToFailure([FromBody] AddBadPracticeToFailureResource resource,
-        [FromRoute] int failureId)
-    {
-        var addBadPracticeToFailureCommand = 
-            AddBadPracticeToFailureCommandFromResourceAssembler.ToCommandFromResource(resource, failureId);
-        var failure = await failureCommandService.Handle(addBadPracticeToFailureCommand);
-        if (failure is null) return BadRequest("Bad Practice could not be added to the failure.");
-        var failureResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
-        return CreatedAtAction(nameof(GetFailureById), new { failureId = failureResource.Id }, failureResource);
-    }
-    
-    /// <summary>
-    /// Post a Odb error to a Failure
-    /// </summary>
-    /// <param name="resource"></param>
-    /// <param name="failureId"></param>
-    /// <returns></returns>
-    [HttpPost("{failureId:int}/odbErrors")]
-    public async Task<IActionResult> AddOdbErrorToFailure([FromBody] AddOdbErrorToFailureResource resource,
-        [FromRoute] int failureId)
-    {
-        var addOdbErrorToFailureCommand = 
-            AddOdbErrorToFailureCommandFromResourceAssembler.ToCommandFromResource(resource, failureId);
-        var failure = await failureCommandService.Handle(addOdbErrorToFailureCommand);
-        if (failure is null) return BadRequest("Bad Practice could not be added to the failure.");
-        var failureResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
-        return CreatedAtAction(nameof(GetFailureById), new { failureId = failureResource.Id }, failureResource);
-    }
-    
-    
-    
 }

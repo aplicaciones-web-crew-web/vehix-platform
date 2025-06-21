@@ -7,6 +7,6 @@ public static class CreateOdbErrorCommandFromResourceAssembler
 {
     public static CreateOdbErrorCommand ToCommandFromResource(CreateOdbErrorResource resource)
     {
-        return new CreateOdbErrorCommand(resource.ErrorCode, resource.ErrorCodeTitle);
+        return new CreateOdbErrorCommand(resource.ErrorCode, resource.ErrorCodeTitle, resource.ErrorType);
     }
 }
