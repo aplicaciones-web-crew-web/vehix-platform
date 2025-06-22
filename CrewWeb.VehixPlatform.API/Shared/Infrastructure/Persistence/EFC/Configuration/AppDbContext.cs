@@ -1,4 +1,5 @@
 using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +20,10 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         base.OnModelCreating(builder);
         
         // Apply configurations for the Monitoring bounded context
-
         builder.ApplyMonitoringConfiguration();
+        
+        // Apply configurations for the Identity and Access Management bounded context
+        builder.ApplyIamConfiguration();
 
         // Use snake case naming convention for the database
         builder.UseSnakeCaseNamingConvention();

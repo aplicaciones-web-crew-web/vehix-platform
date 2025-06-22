@@ -124,7 +124,11 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
-
+    if (app.Environment.IsDevelopment())
+    {
+        // Recreate the database on each run during development
+        context.Database.EnsureDeleted();
+    }
     context.Database.EnsureCreated();
 }
 
