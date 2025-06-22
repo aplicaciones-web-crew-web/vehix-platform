@@ -133,11 +133,14 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Use Swagger for API documentation if in development mode
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+ //   app.UseSwagger();
+ //   app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Apply CORS Policy
 app.UseCors("AllowAllPolicy");
