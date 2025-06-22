@@ -15,15 +15,15 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS builder
 WORKDIR /app
 # Copy the project files
 # Copy the project files and restore dependencies
-COPY CrewWeb.Vehix.Platform.API/*.csproj CrewWeb.Vehix.Platform.API/
+COPY CrewWeb.VehixPlatform.API/*.csproj CrewWeb.VehixPlatform.API/
 # Restore dependencies
-RUN dotnet restore ./CrewWeb.Vehix.Platform.API
+RUN dotnet restore ./CrewWeb.VehixPlatform.API
 # Copy the rest of the application files
 COPY . .
 
 # Step 2: Deploy the application to builder stage
 # Publish the application in Release mode
-RUN dotnet publish ./CrewWeb.Vehix.Platform.API -c Release -o out
+RUN dotnet publish ./CrewWeb.VehixPlatform.API -c Release -o out
 
 # Step 3: Publish to Production and Run the application
 # Use the official .NET runtime image to run the application
@@ -34,4 +34,4 @@ WORKDIR /app
 COPY --from=builder /app/out .
 EXPOSE 80
 # Set EntryPoint to run the application
-ENTRYPOINT ["dotnet", "CrewWeb.Vehix.Platform.API.dll"]
+ENTRYPOINT ["dotnet", "CrewWeb.VehixPlatform.API.dll"]
