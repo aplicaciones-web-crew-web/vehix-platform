@@ -1,7 +1,7 @@
 ﻿namespace CrewWeb.VehixPlatform.API.Management.Domain.Model.ValueObjects;
 
 /// <summary>
-/// Represents a device information with a name and type.  
+/// Represents device information with a name and type.  
 /// </summary>
 /// <param name="Name">
 /// The name of the device, which can be a string representation of the name.

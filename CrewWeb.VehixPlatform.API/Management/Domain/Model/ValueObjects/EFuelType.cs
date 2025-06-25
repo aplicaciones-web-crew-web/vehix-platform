@@ -7,5 +7,6 @@ public enum EFuelType
     Gasoline,
     Diesel,
     Electric,
-    Hybrid
+    Hybrid,
+    None
 }

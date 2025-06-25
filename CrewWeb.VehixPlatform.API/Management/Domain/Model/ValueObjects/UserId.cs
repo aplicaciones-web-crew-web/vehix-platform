@@ -4,6 +4,6 @@
 /// Represents a unique identifier for a User.
 /// </summary>
 /// <param name="Id">
-///  The unique identifier for the User.
+/// The unique identifier for a User.
 /// </param>
 public record UserId(int Id);
