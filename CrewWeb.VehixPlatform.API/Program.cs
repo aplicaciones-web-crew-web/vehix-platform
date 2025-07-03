@@ -11,6 +11,7 @@ using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Services;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.Shared.Domain.Exceptions;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -144,6 +145,10 @@ app.UseSwaggerUI();
 
 // Apply CORS Policy
 app.UseCors("AllowAllPolicy");
+
+// To improve exception handling
+app.UseMiddleware<ExceptionMiddleware>();
+
 
 app.UseHttpsRedirection();
 
