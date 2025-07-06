@@ -32,8 +32,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="SAP\Infrastructure\Persistence\EFC\Configuration\" />
-      <Folder Include="SAP\Infrastructure\Persistence\EFC\Repositories\" />
       <Folder Include="SAP\Interfaces\Rest\Resources\" />
       <Folder Include="SAP\Interfaces\Rest\Transform\" />
     </ItemGroup>

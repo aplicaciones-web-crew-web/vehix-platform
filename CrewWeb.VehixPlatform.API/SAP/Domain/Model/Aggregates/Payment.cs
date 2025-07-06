@@ -1,5 +1,4 @@
 using CrewWeb.VehixPlatform.API.SAP.Domain.Model.Commands;
-using CrewWeb.VehixPlatform.API.SAP.Domain.Model.ValueObjects;
 
 namespace CrewWeb.VehixPlatform.API.SAP.Domain.Model.Aggregates;
 
