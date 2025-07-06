@@ -1,5 +1,4 @@
 using CrewWeb.VehixPlatform.API.SAP.Domain.Model.Commands;
-using CrewWeb.VehixPlatform.API.SAP.Domain.Model.ValueObjects;
 
 namespace CrewWeb.VehixPlatform.API.SAP.Domain.Model.Entities;
 
@@ -7,21 +6,46 @@ public class Plan
 {
     public int Id { get; set; }
 
-    public EPlan PlanType { get; set; }
-    public string Name { get; set; }
+    public int PlanId { get; set; }
 
-    public decimal Price { get; set; }
+    public string PlanName { get; set; }
+    public double Price { get; set; }
+    public string ImageUrl { get; set; }
 
-    public Plan(string name, decimal price)
+    public Plan(int planId)
     {
-        Name = name;
-        Price = price;
+        PlanId = planId;
+        PlanName = AddPlanName(planId);
+        Price = AddPlanPrice(planId);
+        ImageUrl = AddPlanImageUrl(planId);
     }
 
-    public Plan(CreatePlanCommand command) : this(
-        command.Name,
-        command.Price
-    )
+    public Plan(CreatePlanCommand command) : this(command.PlanId)
     {
+    }
+
+    private string AddPlanName(int planId)
+    {
+        if (planId == 1) return "Standard";
+        if (planId == 2) return "Pro";
+        return "";
+    }
+
+    private double AddPlanPrice(int planId)
+    {
+        if (planId == 1) return 65.0;
+        if (planId == 2) return 99.99;
+        return 0.0;
+    }
+
+    private string AddPlanImageUrl(int planId)
+    {
+        if (planId == 1)
+            return
+                "https://preview.redd.it/bawz2az9poaf1.png?width=268&format=png&auto=webp&s=829fb0a6da1ff9da4af4bcb58807da9d8addac59";
+        if (planId == 2)
+            return
+                "https://preview.redd.it/fi7m6az9poaf1.png?width=268&format=png&auto=webp&s=5b56a46e051dcbfd000bc629e7327b8118ba6959";
+        return string.Empty;
     }
 }

@@ -5,4 +5,8 @@ namespace CrewWeb.VehixPlatform.API.SAP.Domain.Repositories;
 
 public interface IPlanRepository : IBaseRepository<Plan>
 {
+    Task<Plan?> GetByNameAsync(string name);
+    Task<bool> ExistByNameAsync(string name);
+    Task<bool> ExistById(int id);
+
 }
