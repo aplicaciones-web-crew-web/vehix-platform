@@ -5,5 +5,5 @@ namespace CrewWeb.VehixPlatform.API.SAP.Domain.Repositories;
 
 public interface IPaymentRepository : IBaseRepository<Payment>
 {
-    Task<bool> ExistByUserId(int userId);
+    Task<bool> ExistById(int id);
 }

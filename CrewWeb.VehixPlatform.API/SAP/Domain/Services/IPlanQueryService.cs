@@ -14,18 +14,12 @@ public interface IPlanQueryService
     /// <param name="query"></param>
     /// <returns></returns>
     Task<Plan?> Handle(GetPlanByIdQuery query);
-
-    /// <summary>
-    /// Retrieves a probable plan by the user ID.
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    Task<Plan?> Handle(GetPlanByUserIdQuery query);
+    
 
     /// <summary>
     /// Retrieves all plans available in the system.
     /// </summary>
     /// <param name="query"></param>
     /// <returns></returns>
-    Task<IEnumerable<Plan>> Handle(GetAllPlantsQuery query);
+    Task<IEnumerable<Plan>> Handle(GetAllPlansQuery query);
 }

@@ -14,14 +14,7 @@ public interface IPaymentQueryService
     /// <param name="query"></param>
     /// <returns></returns>
     Task<Payment?> Handle(GetPaymentByIdQuery query);
-
-
-    /// <summary>
-    /// Retrieves a probable payment by the user identifier.
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    Task<Payment?> Handle(GetPaymentByUserIdQuery query);
+    
 
     /// <summary>
     /// Retrieves all payments.
