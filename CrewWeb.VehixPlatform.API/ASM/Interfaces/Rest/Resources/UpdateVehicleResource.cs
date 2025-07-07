@@ -1,6 +1,6 @@
-namespace CrewWeb.VehixPlatform.API.ASM.Domain.Model.Commands;
+namespace CrewWeb.VehixPlatform.API.ASM.Interfaces.Rest.Resources;
 
-public record UpdateVehicleCommand(
+public record UpdateVehicleResource(
     int UserId,
     string Description,
     string Name,

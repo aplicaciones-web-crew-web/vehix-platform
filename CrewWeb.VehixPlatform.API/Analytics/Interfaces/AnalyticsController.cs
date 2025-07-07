@@ -34,7 +34,7 @@ public class AnalyticsController(
 
     [HttpGet("vehicle/{vehicleId:int}")]
     [SwaggerOperation(
-        Summary = "Get Analytic by Id",
+        Summary = "Get Analytic by vehicle Id",
         Description = "Returns a Analytic by its vehicle identifier",
         OperationId = "GetAnalyticByVehicleId")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic found", typeof(AnalyticResource))]
