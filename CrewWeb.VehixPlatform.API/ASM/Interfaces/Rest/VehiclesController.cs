@@ -64,4 +64,25 @@ public class VehiclesController(
         var vehicleResource = VehicleResourceFromEntityAssembler.ToResourceFromEntity(vehicle);
         return new CreatedResult(string.Empty, vehicleResource);
     }
+
+    [HttpPut("{vehicleId:int}")]
+    [SwaggerOperation(
+        Summary = "Update a Vehicle",
+        Description = "Updates an existing Vehicle by its ID.",
+        OperationId = "UpdateVehicle")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Vehicle updated successfully", typeof(VehicleResource))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "Vehicle could not be updated")]
+    public async Task<IActionResult> UpdateVehicle(int vehicleId, [FromBody] UpdateVehicleResource resource)
+    {
+        if (vehicleId != resource.Id)
+            return BadRequest("Vehicle ID mismatch.");
+
+        var updateVehicleCommand = UpdateVehicleCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var newVehicle = await vehicleCommandService.Handle(updateVehicleCommand);
+        if (newVehicle is null)
+            return BadRequest("Vehicle could not be updated.");
+
+        var vehicleResource = VehicleResourceFromEntityAssembler.ToResourceFromEntity(newVehicle);
+        return Ok(vehicleResource);
+    }
 }

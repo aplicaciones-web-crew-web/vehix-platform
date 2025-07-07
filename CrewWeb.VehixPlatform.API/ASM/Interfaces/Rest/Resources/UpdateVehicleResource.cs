@@ -1,6 +1,7 @@
 namespace CrewWeb.VehixPlatform.API.ASM.Interfaces.Rest.Resources;
 
 public record UpdateVehicleResource(
+    int Id,
     int UserId,
     string Description,
     string Name,

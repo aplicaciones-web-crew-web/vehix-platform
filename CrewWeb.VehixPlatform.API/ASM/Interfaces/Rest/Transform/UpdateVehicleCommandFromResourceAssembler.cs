@@ -8,6 +8,7 @@ public class UpdateVehicleCommandFromResourceAssembler
     public static UpdateVehicleCommand ToCommandFromResource(UpdateVehicleResource resource)
     {
         return new UpdateVehicleCommand(
+            resource.Id,
             resource.UserId,
             resource.Description,
             resource.Name,
