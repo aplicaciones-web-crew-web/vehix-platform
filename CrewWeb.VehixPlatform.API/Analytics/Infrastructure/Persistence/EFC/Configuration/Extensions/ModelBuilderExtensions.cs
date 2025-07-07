@@ -1,5 +1,4 @@
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Model.Aggregates;
-using CrewWeb.VehixPlatform.API.Management.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrewWeb.VehixPlatform.API.Analytics.Infrastructure.Persistence.EFC.Configuration.Extensions;
