@@ -16,7 +16,7 @@ public class PaymentsController(
     IPaymentCommandService paymentCommandService,
     IPaymentQueryService paymentQueryService) : ControllerBase
 {
-    [HttpGet("{paymentId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Payment by Id",
         Description = "Returns a payment by its unique identifier",
@@ -32,7 +32,7 @@ public class PaymentsController(
         return Ok(resource);
     }
 
-    [HttpGet("payments")]
+    [HttpGet]
     [SwaggerOperation(
         Summary = "Get All Payments",
         Description = "Returns a list of all Payments.",

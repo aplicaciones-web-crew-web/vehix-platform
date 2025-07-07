@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/badpractices")]
+[Route("api/v1/bad-practices")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Bad Practices Endpoints")]
 
@@ -23,7 +23,7 @@ public class BadPracticesController(
     /// </summary>
     /// <param name="badPracticeId"></param>
     /// <returns></returns>
-    [HttpGet("{badPracticeId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Bad Practice by Id",
         Description = "Returns a Bad Practice by its unique identifier.",

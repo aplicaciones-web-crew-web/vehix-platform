@@ -11,7 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/odberrors")]
+[Route("api/v1/odb-errors")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Odb Errors Endpoints")]
 public class OdbErrorsController(
@@ -23,7 +23,7 @@ public class OdbErrorsController(
     /// </summary>
     /// <param name="odbErrorId"></param>
     /// <returns></returns>
-    [HttpGet("{odbErrorId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Odb Error by Id",
         Description = "Returns a Odb error by its unique identifier.",

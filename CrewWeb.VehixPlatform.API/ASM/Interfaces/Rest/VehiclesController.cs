@@ -17,7 +17,7 @@ public class VehiclesController(
     IVehicleQueryService vehicleQueryService
 ) : ControllerBase
 {
-    [HttpGet("{vehicleId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Vehicle by Id",
         Description = "Returns a Vehicle by its unique identifier",
@@ -33,7 +33,7 @@ public class VehiclesController(
         return Ok(resource);
     }
 
-    [HttpGet("users/{userId:int}")]
+    [HttpGet("users/{id:int}")]
     [SwaggerOperation(
         Summary = "Get All vehicle by UserId",
         Description = "Returns vehicles by UserId",
@@ -65,7 +65,7 @@ public class VehiclesController(
         return new CreatedResult(string.Empty, vehicleResource);
     }
 
-    [HttpPut("{vehicleId:int}")]
+    [HttpPut("{id:int}")]
     [SwaggerOperation(
         Summary = "Update a Vehicle",
         Description = "Updates an existing Vehicle by its ID.",

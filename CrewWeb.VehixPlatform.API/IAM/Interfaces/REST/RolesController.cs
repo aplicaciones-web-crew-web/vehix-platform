@@ -16,7 +16,7 @@ public class RolesController(
     IRoleCommandService roleCommandService,
     IRoleQueryService roleQueryService) : ControllerBase
 {
-    [HttpGet("{roleId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Role by Id",
         Description = "Returns a role by its unique identifier.",
