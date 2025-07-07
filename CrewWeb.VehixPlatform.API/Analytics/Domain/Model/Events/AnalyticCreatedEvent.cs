@@ -1,3 +1,5 @@
+using ACME.LearningCenterPlatform.API.Shared.Domain.Model.Events;
+
 namespace CrewWeb.VehixPlatform.API.Analytics.Domain.Model.Events;
 
 public class AnalyticCreatedEvent(
@@ -10,7 +12,7 @@ public class AnalyticCreatedEvent(
     int suspension,
     int fuel,
     int refrigeration
-)
+):IEvent
 {
     public int VehicleId { get; } = vehicleId;
     public int Engine { get; } = engine;

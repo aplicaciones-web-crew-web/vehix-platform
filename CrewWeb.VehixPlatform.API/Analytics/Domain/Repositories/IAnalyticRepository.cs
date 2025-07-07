@@ -5,6 +5,6 @@ namespace CrewWeb.VehixPlatform.API.Analytics.Domain.Repositories;
 
 public interface IAnalyticRepository : IBaseRepository<Analytic>
 {
-    Task<bool>ExistByVehicleId(int vehicleId);
+    Task<bool> ExistByVehicleId(int vehicleId);
     Task<Analytic?> GetByVehicleId(int vehicleId);
 }

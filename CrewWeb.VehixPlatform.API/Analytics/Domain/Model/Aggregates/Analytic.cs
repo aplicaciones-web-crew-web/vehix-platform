@@ -42,4 +42,18 @@ public partial class Analytic
     )
     {
     }
+
+    public Analytic(UpdateAnalyticCommand command) : this(
+        command.VehicleId,
+        command.Engine,
+        command.Transmission,
+        command.Brake,
+        command.Electrical,
+        command.Steering,
+        command.Suspension,
+        command.Fuel,
+        command.Refrigeration
+    )
+    {
+    }
 }

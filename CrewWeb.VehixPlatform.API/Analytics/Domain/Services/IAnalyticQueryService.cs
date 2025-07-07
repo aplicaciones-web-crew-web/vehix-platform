@@ -8,4 +8,6 @@ public interface IAnalyticQueryService
     Task<Analytic?> Handle(GetAnalyticByIdQuery query);
 
     Task<IEnumerable<Analytic>> Handle(GetAllAnalyticsQuery query);
+    
+    Task<Analytic?> Handle(GetAnalyticByVehicleId query);
 }

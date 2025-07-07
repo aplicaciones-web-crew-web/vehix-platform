@@ -1,3 +1,3 @@
 namespace CrewWeb.VehixPlatform.API.Analytics.Domain.Model.Queries;
 
-public record GetAnalyticByIdQuery(int AnalyticId);
+public record GetAnalyticByVehicleId(int VehicleId);
