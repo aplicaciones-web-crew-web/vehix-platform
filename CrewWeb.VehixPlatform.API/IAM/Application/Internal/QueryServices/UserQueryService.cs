@@ -16,4 +16,8 @@ public class UserQueryService(IUserRepository userRepository) : IUserQueryServic
     {
         return await userRepository.ListAsync();
     }
+    public async Task<User?> Handle(GetUserByDniQuery query)
+    {
+        return await userRepository.FindByDniAsync(query.Dni);
+    }
 }

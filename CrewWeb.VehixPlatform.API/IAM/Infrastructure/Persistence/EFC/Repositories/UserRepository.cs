@@ -21,4 +21,10 @@ public class UserRepository(AppDbContext context) : BaseRepository<User>(context
             .Include(u => u.Role)
             .ToListAsync();
     }
+    public async Task<User?> FindByDniAsync(string dni)
+    {
+        return await Context.Set<User>()
+            .Include(u => u.Role)
+            .FirstOrDefaultAsync(u => u.Dni == dni);
+    }
 }

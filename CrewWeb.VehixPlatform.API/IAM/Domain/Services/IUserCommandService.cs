@@ -6,4 +6,5 @@ namespace CrewWeb.VehixPlatform.API.IAM.Domain.Services;
 public interface IUserCommandService
 {
     Task<User?> Handle(CreateUserCommand command);
+    Task<(User user, string token)> Handle(SignInCommand command);
 }
