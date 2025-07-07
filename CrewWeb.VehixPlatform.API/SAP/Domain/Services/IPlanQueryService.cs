@@ -15,6 +15,8 @@ public interface IPlanQueryService
     /// <returns></returns>
     Task<Plan?> Handle(GetPlanByIdQuery query);
     
+    
+
 
     /// <summary>
     /// Retrieves all plans available in the system.
@@ -22,4 +24,11 @@ public interface IPlanQueryService
     /// <param name="query"></param>
     /// <returns></returns>
     Task<IEnumerable<Plan>> Handle(GetAllPlansQuery query);
+
+    /// <summary>
+    /// Retrieves a plan by its name.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    Task<Plan?> Handle(GetPlanByNameQuery query);
 }

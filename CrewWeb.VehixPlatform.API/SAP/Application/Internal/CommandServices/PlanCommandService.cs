@@ -16,30 +16,31 @@ public class PlanCommandService(
     IMediator domainEventPublisher
 ) : IPlanCommandService
 {
-    public async Task<Plan> Handle(CreatePlanCommand command)
+    public async Task<Plan?> Handle(CreatePlanCommand command)
     {
-        
-        // Validate the plan Id exists in the repository
-        if (!Enum.IsDefined(typeof(EPlan), command.PlanId))
-            throw new GeneralException("The Plan Id must be valid", "VALIDATION");
-        
-        // Validate if the plan Id is within the valid range
-        if (command.PlanId <= 0 || command.PlanId > 2)
-            throw new ArgumentException("Plan ID must be 1 or 2.", nameof(command.PlanId));
+        // Validate the plan name exists in the repository
+        if (!Enum.TryParse<EPlan>(command.Name, ignoreCase: true, out var ePlanValue))
+            throw new GeneralException("The Plan must be valid (Standard or Pro).", "VALIDATION");
+
+        var standardizedPlanName = new Plan(command.Name).Name;
 
         // Validate if the plan already exists
-        var planExists = await planRepository.ExistById(command.PlanId);
-        if (planExists) throw new GeneralException("The Plan already exists", "ALREADY_EXISTS");
+        var planExistsByName = await planRepository.ExistByName(standardizedPlanName);
 
-        // Proccess the command to create a new plan
+        if (planExistsByName)
+            throw new GeneralException($"A plan with the name '{standardizedPlanName}' already exists.",
+                "ALREADY_EXISTS");
+
+
+        // Proceed with plan creation
         var plan = new Plan(command);
         await planRepository.AddAsync(plan);
         await unitOfWork.CompleteAsync();
 
         // Publish the domain event for plan creation
         await domainEventPublisher.PublishAsync(new PlanCreatedEvent(
-            plan.PlanId,
-            plan.PlanName,
+            plan.Id,
+            plan.Name,
             plan.Price,
             plan.ImageUrl
         ));

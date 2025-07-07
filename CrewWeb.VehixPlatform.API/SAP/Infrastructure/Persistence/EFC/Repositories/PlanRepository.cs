@@ -16,6 +16,20 @@ public class PlanRepository(AppDbContext context)
             .AnyAsync(p => p.Id == id);
     }
 
+    public Task<bool> ExistByName(string name)
+    {
+        return Context.Set<Plan>()
+            .AsNoTracking()
+            .AnyAsync(p => p.Name == name);
+    }
+
+    public Task<Plan?> FindByName(string name)
+    {
+        return Context.Set<Plan>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Name == name);
+    }
+
     public Task<Plan?> GetById(int id)
     {
         return Context.Set<Plan>()
