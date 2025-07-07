@@ -11,6 +11,12 @@ using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Services;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.SAP.Application.Internal.CommandServices;
+using CrewWeb.VehixPlatform.API.SAP.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.SAP.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.SAP.Domain.Services;
+using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.Shared.Domain.Exceptions;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -108,6 +114,18 @@ builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 
 builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 
+
+//Subscription Bounded Context
+// Repositories
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+// Commands Services
+builder.Services.AddScoped<IPlanCommandService, PlanCommandService>();
+builder.Services.AddScoped<IPaymentCommandService, PaymentCommandService>();
+// Queries Services
+builder.Services.AddScoped<IPlanQueryService, PlanQueryService>();
+builder.Services.AddScoped<IPaymentQueryService, PaymentQueryService>();
+
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
     configuration: builder.Configuration,
@@ -144,6 +162,10 @@ app.UseSwaggerUI();
 
 // Apply CORS Policy
 app.UseCors("AllowAllPolicy");
+
+// To improve exception handling
+app.UseMiddleware<ExceptionMiddleware>();
+
 
 app.UseHttpsRedirection();
 

@@ -14,6 +14,8 @@ public partial class Failure
 
     public int BadPracticeId { get; private set; }
     public int OdbErrorId { get; private set; }
+    
+    
     public int VehicleId { get; private set; }
 
 
