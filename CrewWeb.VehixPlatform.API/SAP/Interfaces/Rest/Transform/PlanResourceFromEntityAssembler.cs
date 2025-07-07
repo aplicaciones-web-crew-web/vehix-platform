@@ -9,7 +9,7 @@ public class PlanResourceFromEntityAssembler
     {
         return new PlanResource(
             entity.Id,
-            entity.PlanName,
+            entity.Name,
             entity.Price,
             entity.ImageUrl
         );

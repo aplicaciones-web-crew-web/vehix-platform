@@ -32,6 +32,22 @@ public class PlansController(
         return Ok(resource);
     }
 
+    [HttpGet("{name}")]
+    [SwaggerOperation(
+        Summary = "Get Plan by Name",
+        Description = "Returns a plan by its name",
+        OperationId = "GetPlanByName")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Plan found", typeof(PlanResource))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Plan not found")]
+    public async Task<IActionResult> GetPlanByName(string name)
+    {
+        var getPlanByNameQuery = new GetPlanByNameQuery(name);
+        var plan = await planQueryService.Handle(getPlanByNameQuery);
+        if (plan is null) return NotFound();
+        var resource = PlanResourceFromEntityAssembler.ToResourceFromEntity(plan);
+        return Ok(resource);
+    }
+
 
     [HttpGet]
     [SwaggerOperation(

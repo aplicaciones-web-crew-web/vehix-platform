@@ -8,7 +8,7 @@ public class CreatePlanCommandFromResourceAssembler
     public static CreatePlanCommand ToCommandFromResource(CreatePlanResource resource)
     {
         return new CreatePlanCommand(
-            resource.PlanId
+            resource.Name
         );
     }
 }

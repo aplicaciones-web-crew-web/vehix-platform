@@ -29,7 +29,7 @@ public static class ModelBuilderExtensions
         // Plan properties
         builder.Entity<Plan>().HasKey(plan => plan.Id);
         builder.Entity<Plan>().Property(plan => plan.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Plan>().Property(plan => plan.PlanName).IsRequired().HasMaxLength(100);
+        builder.Entity<Plan>().Property(plan => plan.Name).IsRequired().HasMaxLength(100);
         builder.Entity<Plan>().Property(plan => plan.ImageUrl).IsRequired().HasMaxLength(250);
         builder.Entity<Plan>().Property(plan => plan.Price).IsRequired();
     }
