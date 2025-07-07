@@ -20,6 +20,10 @@ using CrewWeb.VehixPlatform.API.IAM.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Hashing.BCrypt.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Configuration;
+using CrewWeb.VehixPlatform.API.IAM.Application.Internal.OutboundServices;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.QueryServices;
@@ -121,6 +125,10 @@ builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 // Queries Services
 builder.Services.AddScoped<IRoleQueryService, RoleQueryService>();
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+// Authentication Services
+builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 
 builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 

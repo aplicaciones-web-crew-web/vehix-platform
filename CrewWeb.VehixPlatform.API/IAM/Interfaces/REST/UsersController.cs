@@ -9,15 +9,20 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CrewWeb.VehixPlatform.API.IAM.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/users")]
 [Produces(MediaTypeNames.Application.Json)]
-[SwaggerTag("Available User Endpoints")]
+[SwaggerTag("Available Users Endpoints")]
 public class UsersController(
     IUserCommandService userCommandService,
-    IUserQueryService userQueryService
-) : ControllerBase
+    IUserQueryService userQueryService) : ControllerBase
 {
     [HttpGet("{userId:int}")]
+    [SwaggerOperation(
+        Summary = "Get User by Id",
+        Description = "Returns a user by its unique identifier.",
+        OperationId = "GetUserById")]
+    [SwaggerResponse(StatusCodes.Status200OK, "User found", typeof(UserResource))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "User not found")]
     public async Task<IActionResult> GetUserById([FromRoute] int userId)
     {
         var user = await userQueryService.Handle(new GetUserByIdQuery(userId));
@@ -27,6 +32,11 @@ public class UsersController(
     }
 
     [HttpGet]
+    [SwaggerOperation(
+        Summary = "Get All Users",
+        Description = "Returns a list of all users.",
+        OperationId = "GetAllUsers")]
+    [SwaggerResponse(StatusCodes.Status200OK, "List of users", typeof(IEnumerable<UserResource>))]
     public async Task<IActionResult> GetAllUsers()
     {
         var users = await userQueryService.Handle(new GetAllUsersQuery());
@@ -35,11 +45,17 @@ public class UsersController(
     }
 
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Create User",
+        Description = "Creates a new user and returns the created user resource.",
+        OperationId = "CreateUser")]
+    [SwaggerResponse(StatusCodes.Status201Created, "User created successfully", typeof(UserResource))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "User could not be created")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserResource resource)
     {
         var command = CreateUserCommandFromResourceAssembler.ToCommandFromResource(resource);
         var user = await userCommandService.Handle(command);
-        if (user is null) return BadRequest();
+        if (user is null) return BadRequest("User could not be created.");
         var userResource = UserResourceFromEntityAssembler.ToResourceFromEntity(user);
         return CreatedAtAction(nameof(GetUserById), new { userId = userResource.Id }, userResource);
     }
