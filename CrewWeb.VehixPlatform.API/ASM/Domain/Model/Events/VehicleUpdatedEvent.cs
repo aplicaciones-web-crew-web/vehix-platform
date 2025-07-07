@@ -2,7 +2,8 @@ using ACME.LearningCenterPlatform.API.Shared.Domain.Model.Events;
 
 namespace CrewWeb.VehixPlatform.API.ASM.Domain.Model.Events;
 
-public class VehicleCreatedEvent(
+public class VehicleUpdatedEvent(
+    int id,
     int userId,
     string description,
     string name,
@@ -13,6 +14,7 @@ public class VehicleCreatedEvent(
     string imageUrl
 ) : IEvent
 {
+    public int Id { get; } = id;
     public int UserId { get; } = userId;
     public string Description { get; } = description;
     public string Name { get; } = name;

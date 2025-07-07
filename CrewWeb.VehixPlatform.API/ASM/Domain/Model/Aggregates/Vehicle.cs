@@ -37,4 +37,16 @@ public class Vehicle
     )
     {
     }
+
+    public Vehicle(UpdateVehicleCommand command) : this(
+        command.UserId,
+        command.Name,
+        command.Brand,
+        command.Model,
+        command.Mileage,
+        command.Year,
+        command.ImageUrl
+    )
+    {
+    }
 }

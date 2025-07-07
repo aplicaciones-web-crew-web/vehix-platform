@@ -53,8 +53,8 @@ public class AnalyticCommandService(
 
     public async Task<Analytic?> Handle(UpdateAnalyticCommand command)
     {
-        var analyticExists = analyticRepository.ExistByVehicleId(command.VehicleId);
-        if (!analyticExists.Result)
+        var analyticExists = await analyticRepository.ExistByVehicleId(command.VehicleId);
+        if (!analyticExists)
             throw new GeneralException("The Analytic does not exist for the given Vehicle Id", "NOT_FOUND");
 
         // Validate system values

@@ -7,4 +7,7 @@ public interface IVehicleRepository : IBaseRepository<Vehicle>
 {
     Task<bool> ExistById(int id);
     Task<Vehicle?> GetById(int id);
+    
+    Task<IEnumerable<Vehicle>> GetByUserId(int userId);
+
 }

@@ -3,7 +3,7 @@ using CrewWeb.VehixPlatform.API.SAP.Domain.Model.Events;
 
 namespace CrewWeb.VehixPlatform.API.SAP.Application.Internal.EventHandlers;
 
-public class PaymentCreatedEventHandler:IEventHandler<PaymentCreatedEvent>
+public class PaymentCreatedEventHandler: IEventHandler<PaymentCreatedEvent>
 {
     public Task Handle(PaymentCreatedEvent domainEvent, CancellationToken cancellationToken)
     {
