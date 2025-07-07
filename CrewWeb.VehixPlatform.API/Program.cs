@@ -126,6 +126,10 @@ builder.Services.AddScoped<IPaymentCommandService, PaymentCommandService>();
 builder.Services.AddScoped<IPlanQueryService, PlanQueryService>();
 builder.Services.AddScoped<IPaymentQueryService, PaymentQueryService>();
 
+// Anlytics Bounded Context
+// Repositories
+builder.Services.AddScoped<IAnalyticRepository, AnalyticRepository>();
+
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
     configuration: builder.Configuration,

@@ -29,6 +29,10 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         // Apply Configurations for the Subscription bounded context
         builder.ApplySubscriptionsConfiguration();
         
+        // Apply configurations for the Analytics bounded context
+        builder.Appl
+        
+        
         // Use snake case naming convention for the database
         builder.UseSnakeCaseNamingConvention();
     }
