@@ -1,3 +1,4 @@
+using CrewWeb.VehixPlatform.API.Analytics.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Configuration.Extensions;
@@ -28,6 +29,10 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         // Apply Configurations for the Subscription bounded context
         builder.ApplySubscriptionsConfiguration();
+        
+        // Apply configurations for the Analytics bounded context
+        builder.ApplyAnalyticsConfiguration();
+        
         
         // Use snake case naming convention for the database
         builder.UseSnakeCaseNamingConvention();

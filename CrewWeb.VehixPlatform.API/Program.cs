@@ -1,6 +1,11 @@
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
+using CrewWeb.VehixPlatform.API.Analytics.Application.Internal.CommandServices;
+using CrewWeb.VehixPlatform.API.Analytics.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.Analytics.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.Analytics.Domain.Services;
+using CrewWeb.VehixPlatform.API.Analytics.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
@@ -126,6 +131,14 @@ builder.Services.AddScoped<IPaymentCommandService, PaymentCommandService>();
 builder.Services.AddScoped<IPlanQueryService, PlanQueryService>();
 builder.Services.AddScoped<IPaymentQueryService, PaymentQueryService>();
 
+// Anlytics Bounded Context
+// Repositories
+builder.Services.AddScoped<IAnalyticRepository, AnalyticRepository>();
+// Commands Services
+builder.Services.AddScoped<IAnalyticCommandService, AnalyticCommandService>();
+// Queries Services
+builder.Services.AddScoped<IAnalyticQueryService, AnalyticQueryService>();
+
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
     configuration: builder.Configuration,
@@ -147,14 +160,15 @@ using (var scope = app.Services.CreateScope())
         // Recreate the database on each run during development
         context.Database.EnsureDeleted();
     }
+
     context.Database.EnsureCreated();
 }
 
 // Use Swagger for API documentation if in development mode
 //if (app.Environment.IsDevelopment())
 //{
- //   app.UseSwagger();
- //   app.UseSwaggerUI();
+//   app.UseSwagger();
+//   app.UseSwaggerUI();
 //}
 
 app.UseSwagger();
