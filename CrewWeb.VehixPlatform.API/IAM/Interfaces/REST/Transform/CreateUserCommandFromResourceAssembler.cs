@@ -9,13 +9,12 @@ public static class CreateUserCommandFromResourceAssembler
     {
         return new CreateUserCommand(
             resource.Name,
-            resource.Lastname,
+            resource.LastName,
             resource.Email,
-            resource.PasswordHash,
+            resource.Password,
             resource.PhoneNumber,
             resource.Dni,
             resource.Gender,
-            resource.PlanId,
-            resource.RoleId);
+            resource.PlanId);
     }
 }

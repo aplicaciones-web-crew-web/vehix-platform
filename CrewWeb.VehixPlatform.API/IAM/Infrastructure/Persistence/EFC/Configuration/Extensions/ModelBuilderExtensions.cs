@@ -14,17 +14,14 @@ public static class ModelBuilderExtensions
         builder.Entity<User>().HasKey(u => u.Id);
         builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(50);
-        builder.Entity<User>().Property(u => u.Lastname).IsRequired().HasMaxLength(50);
+        builder.Entity<User>().Property(u => u.LastName).IsRequired().HasMaxLength(50);
         builder.Entity<User>().Property(u => u.Email).IsRequired().HasMaxLength(50);
-        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
+        builder.Entity<User>().Property(u => u.Password).IsRequired();
         builder.Entity<User>().Property(u => u.PhoneNumber).IsRequired().HasMaxLength(15);
         builder.Entity<User>().Property(u => u.Dni).IsRequired().HasMaxLength(20);
         builder.Entity<User>().Property(u => u.Gender).IsRequired().HasMaxLength(10);
         builder.Entity<User>().Property(u => u.PlanId).IsRequired();
 
-        builder.Entity<User>()
-            .HasOne(u => u.Role)
-            .WithMany()
-            .HasForeignKey(u => u.RoleId);
+        // Users are stored without relation to roles
     }
 }

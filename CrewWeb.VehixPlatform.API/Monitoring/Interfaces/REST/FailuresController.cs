@@ -1,5 +1,5 @@
 using System.Net.Mime;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Resources;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
@@ -12,6 +12,7 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Failure Endpoints")]
+[Tags("Failures")]
 public class FailuresController(
     IFailureCommandService failureCommandService,
     IFailureQueryService failureQueryService
@@ -20,18 +21,18 @@ public class FailuresController(
     /// <summary>
     /// Get a Failure by its unique identifier.
     /// </summary>
-    /// <param name="failureId"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{failureId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Failure by Id",
         Description = "Returns a failure by its unique identifier.",
         OperationId = "GetFailureById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Failure found", typeof(FailureResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Failure not found")]
-    public async Task<IActionResult> GetFailureById([FromRoute] int failureId)
+    public async Task<IActionResult> GetFailureById([FromRoute] int id)
     {
-        var failure = await failureQueryService.Handle(new GetFailureByIdQuery(failureId));
+        var failure = await failureQueryService.Handle(new GetFailureByIdQuery(id));
         if (failure is null) return NotFound();
         var resource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
         return Ok(resource);
@@ -74,6 +75,20 @@ public class FailuresController(
         var failure = await failureCommandService.Handle(createFailureCommand);
         if (failure is null) return BadRequest("Failure could not be created.");
         var createdResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
-        return CreatedAtAction(nameof(GetFailureById), new { failureId = createdResource.Id }, createdResource);
+        return new CreatedResult(string.Empty, createdResource);
+    }
+
+    [HttpGet("{error-type}/failures")]
+    [SwaggerOperation(
+        Summary = "Get Failures by Error Type",
+        Description = "Returns a list of failures associated with a specific error type",
+        OperationId = "GetFailuresByErrorType")]
+    [SwaggerResponse(StatusCodes.Status200OK, "List of failures", typeof(IEnumerable<FailureResource>))]
+    public async Task<IActionResult> GetFailuresByErrorType(string errorType)
+    {
+        var getAllFailuresByErrorTypeQuery = new GetAllFailuresByErrorTypeQuery(errorType);
+        var failures = await failureQueryService.Handle(getAllFailuresByErrorTypeQuery);
+        var failureResources = failures.Select(FailureResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(failureResources);
     }
 }

@@ -5,10 +5,10 @@ namespace CrewWeb.VehixPlatform.API.Analytics.Interfaces.Rest.Transform;
 
 public class UpdateAnalyticCommandFromResourceAssembler
 {
-    public static UpdateAnalyticCommand ToCommandFromResource(UpdateAnalyticResource resource)
+    public static UpdateAnalyticCommand ToCommandFromResource(int analyticId, UpdateAnalyticResource resource)
     {
         return new UpdateAnalyticCommand(
-            resource.VehicleId,
+            analyticId,
             resource.Engine,
             resource.Transmission,
             resource.Brake,

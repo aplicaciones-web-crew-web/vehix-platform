@@ -6,6 +6,11 @@ using CrewWeb.VehixPlatform.API.Analytics.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Services;
 using CrewWeb.VehixPlatform.API.Analytics.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.ASM.Application.Internal;
+using CrewWeb.VehixPlatform.API.ASM.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.ASM.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.ASM.Domain.Services;
+using CrewWeb.VehixPlatform.API.ASM.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
@@ -15,6 +20,10 @@ using CrewWeb.VehixPlatform.API.IAM.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Hashing.BCrypt.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
+using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Configuration;
+using CrewWeb.VehixPlatform.API.IAM.Application.Internal.OutboundServices;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.QueryServices;
@@ -116,6 +125,10 @@ builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 // Queries Services
 builder.Services.AddScoped<IRoleQueryService, RoleQueryService>();
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+// Authentication Services
+builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 
 builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 
@@ -139,6 +152,15 @@ builder.Services.AddScoped<IAnalyticCommandService, AnalyticCommandService>();
 // Queries Services
 builder.Services.AddScoped<IAnalyticQueryService, AnalyticQueryService>();
 
+// Assets and Resource Management Bounded Context
+// Repositories
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+// Commands Services
+builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();
+// Queries Services
+builder.Services.AddScoped<IVehicleQueryService, VehicleQueryService>();
+
+
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
     configuration: builder.Configuration,
@@ -147,6 +169,7 @@ builder.Services.AddCortexMediator(
         options.AddOpenCommandPipelineBehavior(typeof(LoggingCommandBehavior<>));
         //options.AddDefaultBehaviors();
     });
+
 
 var app = builder.Build();
 

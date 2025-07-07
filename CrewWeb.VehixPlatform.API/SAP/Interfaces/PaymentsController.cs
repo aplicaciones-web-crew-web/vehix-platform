@@ -16,23 +16,23 @@ public class PaymentsController(
     IPaymentCommandService paymentCommandService,
     IPaymentQueryService paymentQueryService) : ControllerBase
 {
-    [HttpGet("{paymentId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Payment by Id",
         Description = "Returns a payment by its unique identifier",
         OperationId = "GetPaymentById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Payment found", typeof(PaymentResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Payment not found")]
-    public async Task<IActionResult> GetPaymentById(int paymentId)
+    public async Task<IActionResult> GetPaymentById(int id)
     {
-        var getPaymentByIdQuery = new GetPaymentByIdQuery(paymentId);
+        var getPaymentByIdQuery = new GetPaymentByIdQuery(id);
         var payment = await paymentQueryService.Handle(getPaymentByIdQuery);
         if (payment is null) return NotFound();
         var resource = PaymentResourceFromEntityAssembler.ToResourceFromEntity(payment);
         return Ok(resource);
     }
 
-    [HttpGet("payments")]
+    [HttpGet]
     [SwaggerOperation(
         Summary = "Get All Payments",
         Description = "Returns a list of all Payments.",
@@ -55,8 +55,7 @@ public class PaymentsController(
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Payment could not be created")]
     public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentResource resource)
     {
-        var createPaymentCommand =
-            CreatePaymentCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var createPaymentCommand = CreatePaymentCommandFromResourceAssembler.ToCommandFromResource(resource);
         var payment = await paymentCommandService.Handle(createPaymentCommand);
         if (payment is null) return BadRequest("Payment could not be created.");
         var paymentResource = PaymentResourceFromEntityAssembler.ToResourceFromEntity(payment);

@@ -16,24 +16,24 @@ public class PlansController(
     IPlanCommandService planCommandService,
     IPlanQueryService planQueryService) : ControllerBase
 {
-    [HttpGet("{planId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Plan by Id",
         Description = "Returns a plan by its unique identifier",
         OperationId = "GetPlanById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Plan found", typeof(PlanResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Plan not found")]
-    public async Task<IActionResult> GetPlanById(int planId)
+    public async Task<IActionResult> GetPlanById(int id)
     {
-        var getPlanByIdQuery = new GetPlanByIdQuery(planId);
+        var getPlanByIdQuery = new GetPlanByIdQuery(id);
         var plan = await planQueryService.Handle(getPlanByIdQuery);
         if (plan is null) return NotFound();
         var resource = PlanResourceFromEntityAssembler.ToResourceFromEntity(plan);
         return Ok(resource);
     }
-    
-    
-    [HttpGet("plans")]
+
+
+    [HttpGet]
     [SwaggerOperation(
         Summary = "Get All Plans",
         Description = "Returns a list of all Plans.",
@@ -63,5 +63,4 @@ public class PlansController(
         var planResource = PlanResourceFromEntityAssembler.ToResourceFromEntity(plan);
         return new CreatedResult(string.Empty, planResource);
     }
-    
 }

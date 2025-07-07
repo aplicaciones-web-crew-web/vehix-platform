@@ -1,6 +1,6 @@
 using System.Net.Mime;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Commands;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Resources;
@@ -11,7 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/odberrors")]
+[Route("api/v1/odb-errors")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Odb Errors Endpoints")]
 public class OdbErrorsController(
@@ -21,18 +21,18 @@ public class OdbErrorsController(
     /// <summary>
     /// Gets Odb Error by its unique identifier.
     /// </summary>
-    /// <param name="odbErrorId"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{odbErrorId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Odb Error by Id",
         Description = "Returns a Odb error by its unique identifier.",
         OperationId = "GetOdbErrorById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Odb Error found", typeof(OdbErrorResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Category not found")]
-    public async Task<IActionResult> GetOdbErrorById(int odbErrorId)
+    public async Task<IActionResult> GetOdbErrorById(int id)
     {
-        var getOdbErrorByIdQuery = new GetOdbErrorByIdQuery(odbErrorId);
+        var getOdbErrorByIdQuery = new GetOdbErrorByIdQuery(id);
         var odbError = await odbErrorQueryService.Handle(getOdbErrorByIdQuery);
         if (odbError is null) return NotFound();
         var resource = OdbErrorResourceFromEntityAssembler.ToResourceFromEntity(odbError);
@@ -76,6 +76,6 @@ public class OdbErrorsController(
         var odbError = await odbErrorCommandService.Handle(createOdbErrorCommand);
         if (odbError is null) return BadRequest("Odb Error could not be created.");
         var odbErrorResource = OdbErrorResourceFromEntityAssembler.ToResourceFromEntity(odbError);
-        return CreatedAtAction(nameof(GetOdbErrorById), new { odbErrorId = odbErrorResource.Id }, odbErrorResource);
+        return new CreatedResult(string.Empty, odbErrorResource);
     }
 }

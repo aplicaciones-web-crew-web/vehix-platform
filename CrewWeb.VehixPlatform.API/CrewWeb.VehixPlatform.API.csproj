@@ -34,6 +34,7 @@
     <ItemGroup>
       <Folder Include="Analytics\Domain\Model\Entities\" />
       <Folder Include="Analytics\Domain\Model\ValueObjects\" />
+      <Folder Include="ASM\Domain\Model\Entities\" />
     </ItemGroup>
 
 </Project>

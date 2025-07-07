@@ -10,14 +10,12 @@ public static class UserResourceFromEntityAssembler
         return new UserResource(
             user.Id,
             user.Name,
-            user.Lastname,
+            user.LastName,
             user.Email,
-            user.PasswordHash,
+            user.Password,
             user.PhoneNumber,
             user.Dni,
             user.Gender,
-            user.PlanId,
-            user.RoleId,
-            user.Role.Name);
+            user.PlanId);
     }
 }
