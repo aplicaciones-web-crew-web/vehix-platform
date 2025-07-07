@@ -9,26 +9,32 @@ namespace CrewWeb.VehixPlatform.API.IAM.Application.Internal.CommandServices;
 
 public class UserCommandService(
     IUserRepository userRepository,
-    IRoleRepository roleRepository,
+
     ITokenService tokenService,
     IHashingService hashingService,
     IUnitOfWork unitOfWork) : IUserCommandService
 {
     public async Task<User?> Handle(CreateUserCommand command)
     {
-        var role = await roleRepository.FindByIdAsync(command.RoleId);
-        if (role is null) throw new Exception("Role not found");
-
-        var user = new User(command);
+        var hashedPassword = hashingService.HashPassword(command.Password);
+        var user = new User(
+            command.Name,
+            command.LastName,
+            command.Email,
+            hashedPassword,
+            command.PhoneNumber,
+            command.Dni,
+            command.Gender,
+            command.PlanId);
         await userRepository.AddAsync(user);
         await unitOfWork.CompleteAsync();
-        user.Role = role;
+
         return user;
     }
     public async Task<(User user, string token)> Handle(SignInCommand command)
     {
         var user = await userRepository.FindByDniAsync(command.Dni);
-        if (user == null || !hashingService.VerifyPassword(command.Password, user.PasswordHash))
+        if (user == null || !hashingService.VerifyPassword(command.Password, user.Password))
             throw new Exception("Invalid credentials");
 
         var token = tokenService.GenerateToken(user);

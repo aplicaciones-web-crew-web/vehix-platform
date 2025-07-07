@@ -3,12 +3,10 @@
 public record UserResource(
     int Id,
     string Name,
-    string Lastname,
+    string LastName,
     string Email,
-    string PasswordHash,
+    string Password,
     string PhoneNumber,
     string Dni,
     string Gender,
-    int PlanId,
-    int RoleId,
-    string RoleName);
+    int PlanId);

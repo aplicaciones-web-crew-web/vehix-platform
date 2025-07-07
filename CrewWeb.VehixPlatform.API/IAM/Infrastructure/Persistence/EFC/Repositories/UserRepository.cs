@@ -11,20 +11,17 @@ public class UserRepository(AppDbContext context) : BaseRepository<User>(context
     public new async Task<User?> FindByIdAsync(int id)
     {
         return await Context.Set<User>()
-            .Include(u => u.Role)
             .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public new async Task<IEnumerable<User>> ListAsync()
     {
         return await Context.Set<User>()
-            .Include(u => u.Role)
             .ToListAsync();
     }
     public async Task<User?> FindByDniAsync(string dni)
     {
         return await Context.Set<User>()
-            .Include(u => u.Role)
             .FirstOrDefaultAsync(u => u.Dni == dni);
     }
 }

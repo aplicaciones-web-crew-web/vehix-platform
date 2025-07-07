@@ -6,30 +6,27 @@ public partial class User
 {
     public int Id { get; }
     public string Name { get; private set; } = string.Empty;
-    public string Lastname { get; private set; } = string.Empty;
+    public string LastName { get; private set; } = string.Empty;
     public string Email { get; private set; }
-    public string PasswordHash { get; private set; }
+    public string Password { get; private set; }
     public string PhoneNumber { get; private set; } = string.Empty;
     public string Dni { get; private set; } = string.Empty;
     public string Gender { get; private set; } = string.Empty;
     public int PlanId { get; private set; }
-    public int RoleId { get; private set; }
-    public Role Role { get; internal set; } = null!;
 
-    public User(string name, string lastname, string email, string passwordHash, string phoneNumber, string dni, string gender, int planId, int roleId)
+    public User(string name, string lastName, string email, string password, string phoneNumber, string dni, string gender, int planId)
     {
         Name = name;
-        Lastname = lastname;
+        LastName = lastName;
         Email = email;
-        PasswordHash = passwordHash;
+        Password = password;
         PhoneNumber = phoneNumber;
         Dni = dni;
         Gender = gender;
         PlanId = planId;
-        RoleId = roleId;
     }
 
-    public User(CreateUserCommand command) : this(command.Name, command.Lastname, command.Email, command.PasswordHash, command.PhoneNumber, command.Dni, command.Gender, command.PlanId, command.RoleId)
+    public User(CreateUserCommand command) : this(command.Name, command.LastName, command.Email, command.Password, command.PhoneNumber, command.Dni, command.Gender, command.PlanId)
     {
     }
 }
