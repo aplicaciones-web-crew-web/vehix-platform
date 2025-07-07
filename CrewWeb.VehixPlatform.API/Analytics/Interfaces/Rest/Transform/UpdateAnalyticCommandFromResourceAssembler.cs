@@ -3,11 +3,11 @@ using CrewWeb.VehixPlatform.API.Analytics.Interfaces.Rest.Resources;
 
 namespace CrewWeb.VehixPlatform.API.Analytics.Interfaces.Rest.Transform;
 
-public class CreateAnalyticCommandFromResourceAssembler
+public class UpdateAnalyticCommandFromResourceAssembler
 {
-    public static CreateAnalyticCommand ToCommandFromResource(CreateAnalyticResource resource)
+    public static UpdateAnalyticCommand ToCommandFromResource(UpdateAnalyticResource resource)
     {
-        return new CreateAnalyticCommand(
+        return new UpdateAnalyticCommand(
             resource.VehicleId,
             resource.Engine,
             resource.Transmission,

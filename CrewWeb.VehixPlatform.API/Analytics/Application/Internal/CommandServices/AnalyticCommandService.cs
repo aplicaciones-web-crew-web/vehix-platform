@@ -23,8 +23,8 @@ public class AnalyticCommandService(
 
         // Validate If the Analytic Exist By Vehicle Id
         var analyticExists = await analyticRepository.ExistByVehicleId(command.VehicleId);
-        if (!analyticExists)
-            throw new GeneralException("The Analytic does not exist for the given Vehicle Id", "NOT_FOUND");
+        if (analyticExists)
+            throw new GeneralException("The Analytic does not exist for the given Vehicle Id", "NOT_REPEAT");
 
         // Validate system values
         if (command.Brake < 0 || command.Electrical < 0 || command.Engine < 0 || command.Fuel < 0 ||

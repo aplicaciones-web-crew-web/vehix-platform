@@ -10,4 +10,4 @@ public record UpdateAnalyticCommand(
     int Suspension,
     int Fuel,
     int Refrigeration
-    );
+);

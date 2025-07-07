@@ -1,6 +1,6 @@
 namespace CrewWeb.VehixPlatform.API.Analytics.Interfaces.Rest.Resources;
 
-public record CreateAnalyticResource(
+public record UpdateAnalyticResource(
     int VehicleId,
     int Engine,
     int Transmission,
