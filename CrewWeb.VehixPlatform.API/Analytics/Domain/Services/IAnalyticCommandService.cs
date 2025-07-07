@@ -7,4 +7,5 @@ public interface IAnalyticCommandService
 {
     public Task<Analytic?> Handle(CreateAnalyticCommand command);
     public Task<Analytic?> Handle(UpdateAnalyticCommand command);
+    public Task<Analytic?> Handle(UpdateAnalyticByVehicleIdCommand command);
 }

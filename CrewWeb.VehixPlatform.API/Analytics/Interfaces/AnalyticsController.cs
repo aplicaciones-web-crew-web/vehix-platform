@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using CrewWeb.VehixPlatform.API.Analytics.Domain.Model.Commands;
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Services;
 using CrewWeb.VehixPlatform.API.Analytics.Interfaces.Rest.Resources;
@@ -34,7 +35,7 @@ public class AnalyticsController(
 
     [HttpGet("vehicle/{vehicleId:int}")]
     [SwaggerOperation(
-        Summary = "Get Analytic by vehicle Id",
+        Summary = "Get Analytic by Id",
         Description = "Returns a Analytic by its vehicle identifier",
         OperationId = "GetAnalyticByVehicleId")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic found", typeof(AnalyticResource))]
@@ -87,13 +88,31 @@ public class AnalyticsController(
         OperationId = "UpdateAnalytic")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic updated successfully", typeof(AnalyticResource))]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Analytic could not be updated")]
-    public async Task<IActionResult> UpdateAnalytic([FromBody] UpdateAnalyticResource resource)
+    public async Task<IActionResult> UpdateAnalytic(int analyticId, [FromBody] UpdateAnalyticResource resource)
     {
         var updateAnalyticCommand =
-            UpdateAnalyticCommandFromResourceAssembler.ToCommandFromResource(resource);
-        var analytic = await analyticCommandService.Handle(updateAnalyticCommand);
-        if (analytic is null) return BadRequest("Analytic could not be updated.");
-        var analyticResource = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(analytic);
+            UpdateAnalyticCommandFromResourceAssembler.ToCommandFromResource(analyticId, resource);
+        var newAnalytic = await analyticCommandService.Handle(updateAnalyticCommand);
+        if (newAnalytic is null) return BadRequest("Analytic could not be updated.");
+        var analyticResource = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(newAnalytic);
         return Ok(analyticResource);
+    }
+
+    [HttpPut("vehicles/{vehicleId:int}")]
+    [SwaggerOperation(
+        Summary = "Update an Analytic by VehicleId",
+        Description = "Updates the Analytic for a specific vehicle",
+        OperationId = "UpdateAnalyticByVehicleId")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Analytic updated successfully", typeof(AnalyticResource))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "Analytic could not be updated")]
+    public async Task<IActionResult> UpdateAnalyticByVehicleId(int vehicleId,
+        [FromBody] UpdateAnalyticByVehicleIdResource resource)
+    {
+        var updateAnalyticByVehicleId =
+            UpdateAnalyticByVehicleIdCommandFromResourceAssembler.ToCommandFromResource(vehicleId, resource);
+        var newAnalytic = await analyticCommandService.Handle(updateAnalyticByVehicleId);
+        if (newAnalytic is null) return BadRequest("Analytic could not be updated.");
+        var response = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(newAnalytic);
+        return Ok(response);
     }
 }

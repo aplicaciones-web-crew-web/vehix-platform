@@ -6,6 +6,11 @@ using CrewWeb.VehixPlatform.API.Analytics.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Analytics.Domain.Services;
 using CrewWeb.VehixPlatform.API.Analytics.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.ASM.Application.Internal;
+using CrewWeb.VehixPlatform.API.ASM.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.ASM.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.ASM.Domain.Services;
+using CrewWeb.VehixPlatform.API.ASM.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
@@ -139,6 +144,15 @@ builder.Services.AddScoped<IAnalyticCommandService, AnalyticCommandService>();
 // Queries Services
 builder.Services.AddScoped<IAnalyticQueryService, AnalyticQueryService>();
 
+// Assets and Resource Management Bounded Context
+// Repositories
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+// Commands Services
+builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();
+// Queries Services
+builder.Services.AddScoped<IVehicleQueryService, VehicleQueryService>();
+
+
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
     configuration: builder.Configuration,
@@ -147,6 +161,7 @@ builder.Services.AddCortexMediator(
         options.AddOpenCommandPipelineBehavior(typeof(LoggingCommandBehavior<>));
         //options.AddDefaultBehaviors();
     });
+
 
 var app = builder.Build();
 

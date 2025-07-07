@@ -1,7 +1,7 @@
 namespace CrewWeb.VehixPlatform.API.Analytics.Domain.Model.Commands;
 
-public record UpdateAnalyticCommand(
-    int AnalyticId,
+public record UpdateAnalyticByVehicleIdCommand(
+    int VehicleId,
     int Engine,
     int Transmission,
     int Brake,
