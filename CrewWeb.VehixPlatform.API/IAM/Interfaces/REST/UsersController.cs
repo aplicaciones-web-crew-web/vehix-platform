@@ -23,9 +23,9 @@ public class UsersController(
         OperationId = "GetUserById")]
     [SwaggerResponse(StatusCodes.Status200OK, "User found", typeof(UserResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "User not found")]
-    public async Task<IActionResult> GetUserById([FromRoute] int userId)
+    public async Task<IActionResult> GetUserById([FromRoute] int id)
     {
-        var user = await userQueryService.Handle(new GetUserByIdQuery(userId));
+        var user = await userQueryService.Handle(new GetUserByIdQuery(id));
         if (user is null) return NotFound();
         var resource = UserResourceFromEntityAssembler.ToResourceFromEntity(user);
         return Ok(resource);

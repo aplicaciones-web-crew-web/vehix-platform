@@ -1,5 +1,5 @@
 using System.Net.Mime;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Resources;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
@@ -21,7 +21,7 @@ public class FailuresController(
     /// <summary>
     /// Get a Failure by its unique identifier.
     /// </summary>
-    /// <param name="failureId"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}")]
     [SwaggerOperation(
@@ -30,9 +30,9 @@ public class FailuresController(
         OperationId = "GetFailureById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Failure found", typeof(FailureResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Failure not found")]
-    public async Task<IActionResult> GetFailureById([FromRoute] int failureId)
+    public async Task<IActionResult> GetFailureById([FromRoute] int id)
     {
-        var failure = await failureQueryService.Handle(new GetFailureByIdQuery(failureId));
+        var failure = await failureQueryService.Handle(new GetFailureByIdQuery(id));
         if (failure is null) return NotFound();
         var resource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
         return Ok(resource);
@@ -75,7 +75,7 @@ public class FailuresController(
         var failure = await failureCommandService.Handle(createFailureCommand);
         if (failure is null) return BadRequest("Failure could not be created.");
         var createdResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
-        return CreatedAtAction(nameof(GetFailureById), new { failureId = createdResource.Id }, createdResource);
+        return new CreatedResult(string.Empty, createdResource);
     }
 
     [HttpGet("{error-type}/failures")]

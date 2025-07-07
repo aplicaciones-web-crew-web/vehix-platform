@@ -24,9 +24,9 @@ public class AnalyticsController(
         OperationId = "GetAnalyticById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic found", typeof(AnalyticResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Analytic not found")]
-    public async Task<IActionResult> GetAnalyticById(int analyticId)
+    public async Task<IActionResult> GetAnalyticById(int id)
     {
-        var getAnalyticByIdQuery = new GetAnalyticByIdQuery(analyticId);
+        var getAnalyticByIdQuery = new GetAnalyticByIdQuery(id);
         var analytic = await analyticQueryService.Handle(getAnalyticByIdQuery);
         if (analytic is null) return NotFound();
         var resource = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(analytic);
@@ -40,9 +40,9 @@ public class AnalyticsController(
         OperationId = "GetAnalyticByVehicleId")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic found", typeof(AnalyticResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Analytic not found")]
-    public async Task<IActionResult> GetAnalyticByVehicleId(int vehicleId)
+    public async Task<IActionResult> GetAnalyticByVehicleId(int id)
     {
-        var getAnalyticByVehicleIdQuery = new GetAnalyticByVehicleId(vehicleId);
+        var getAnalyticByVehicleIdQuery = new GetAnalyticByVehicleId(id);
         var analytic = await analyticQueryService.Handle(getAnalyticByVehicleIdQuery);
         if (analytic is null) return NotFound();
         var resource = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(analytic);
@@ -88,10 +88,10 @@ public class AnalyticsController(
         OperationId = "UpdateAnalytic")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic updated successfully", typeof(AnalyticResource))]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Analytic could not be updated")]
-    public async Task<IActionResult> UpdateAnalytic(int analyticId, [FromBody] UpdateAnalyticResource resource)
+    public async Task<IActionResult> UpdateAnalytic(int id, [FromBody] UpdateAnalyticResource resource)
     {
         var updateAnalyticCommand =
-            UpdateAnalyticCommandFromResourceAssembler.ToCommandFromResource(analyticId, resource);
+            UpdateAnalyticCommandFromResourceAssembler.ToCommandFromResource(id, resource);
         var newAnalytic = await analyticCommandService.Handle(updateAnalyticCommand);
         if (newAnalytic is null) return BadRequest("Analytic could not be updated.");
         var analyticResource = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(newAnalytic);
@@ -105,11 +105,11 @@ public class AnalyticsController(
         OperationId = "UpdateAnalyticByVehicleId")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic updated successfully", typeof(AnalyticResource))]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Analytic could not be updated")]
-    public async Task<IActionResult> UpdateAnalyticByVehicleId(int vehicleId,
+    public async Task<IActionResult> UpdateAnalyticByVehicleId(int id,
         [FromBody] UpdateAnalyticByVehicleIdResource resource)
     {
         var updateAnalyticByVehicleId =
-            UpdateAnalyticByVehicleIdCommandFromResourceAssembler.ToCommandFromResource(vehicleId, resource);
+            UpdateAnalyticByVehicleIdCommandFromResourceAssembler.ToCommandFromResource(id, resource);
         var newAnalytic = await analyticCommandService.Handle(updateAnalyticByVehicleId);
         if (newAnalytic is null) return BadRequest("Analytic could not be updated.");
         var response = AnalyticResourceFromEntityAssembler.ToResourceFromEntity(newAnalytic);
