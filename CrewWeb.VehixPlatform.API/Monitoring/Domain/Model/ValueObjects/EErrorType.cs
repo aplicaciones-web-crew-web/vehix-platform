@@ -1,8 +1,7 @@
-namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
+namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.ValueObjects;
 
 public enum EErrorType
 {
-    Undefined ,
     Powertrain,
     Chassis,
     Body,

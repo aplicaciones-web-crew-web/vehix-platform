@@ -25,15 +25,7 @@ public class FailureRepository(AppDbContext context) : BaseRepository<Failure>(c
             .Where(failure => failure.SuggestSolution == suggestSolution)
             .ToListAsync();
     }
-
-    public async Task<IEnumerable<Failure>> FindByStatus(string status)
-    {
-        return await Context.Set<Failure>()
-            .Include(failure => failure.OdbError)
-            .Include(failure => failure.BadPractice)
-            .Where(failure => failure.Status.ToString() == status)
-            .ToListAsync();
-    }
+    
 
     public async Task<IEnumerable<Failure>> FindByType(string type)
     {

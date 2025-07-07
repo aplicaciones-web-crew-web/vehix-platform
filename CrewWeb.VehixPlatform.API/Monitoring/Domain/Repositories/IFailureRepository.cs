@@ -9,7 +9,6 @@ public interface IFailureRepository : IBaseRepository<Failure>
     
     Task<IEnumerable<Failure>> FindBySuggestSolution(string suggestSolution);
     
-    Task<IEnumerable<Failure>> FindByStatus(string status);
     
     Task<IEnumerable<Failure>> FindByType(string type);
 

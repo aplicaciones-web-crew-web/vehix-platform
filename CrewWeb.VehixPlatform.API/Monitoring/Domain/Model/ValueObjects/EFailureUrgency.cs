@@ -1,4 +1,4 @@
-namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
+namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.ValueObjects;
 
 /// <summary>
 /// Represents the urgency level of a failure.

@@ -13,7 +13,6 @@ public static class FailureResourceFromEntityAssembler
             entity.SuggestSolution,
             BadPracticeResourceFromEntityAssembler.ToResourceFromEntity(entity.BadPractice),
             OdbErrorResourceFromEntityAssembler.ToResourceFromEntity(entity.OdbError),
-            entity.Status.GetDisplayName(),
             entity.Type.GetDisplayName(),
             entity.Urgency.GetDisplayName()
         );
