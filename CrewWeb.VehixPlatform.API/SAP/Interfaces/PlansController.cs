@@ -16,7 +16,7 @@ public class PlansController(
     IPlanCommandService planCommandService,
     IPlanQueryService planQueryService) : ControllerBase
 {
-    [HttpGet("{planId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Plan by Id",
         Description = "Returns a plan by its unique identifier",
@@ -33,7 +33,7 @@ public class PlansController(
     }
     
     
-    [HttpGet("plans")]
+    [HttpGet]
     [SwaggerOperation(
         Summary = "Get All Plans",
         Description = "Returns a list of all Plans.",

@@ -12,6 +12,7 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Failure Endpoints")]
+[Tags("Failures")]
 public class FailuresController(
     IFailureCommandService failureCommandService,
     IFailureQueryService failureQueryService
@@ -22,7 +23,7 @@ public class FailuresController(
     /// </summary>
     /// <param name="failureId"></param>
     /// <returns></returns>
-    [HttpGet("{failureId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Failure by Id",
         Description = "Returns a failure by its unique identifier.",
@@ -75,5 +76,19 @@ public class FailuresController(
         if (failure is null) return BadRequest("Failure could not be created.");
         var createdResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
         return CreatedAtAction(nameof(GetFailureById), new { failureId = createdResource.Id }, createdResource);
+    }
+
+    [HttpGet("{error-type}/failures")]
+    [SwaggerOperation(
+        Summary = "Get Failures by Error Type",
+        Description = "Returns a list of failures associated with a specific error type",
+        OperationId = "GetFailuresByErrorType")]
+    [SwaggerResponse(StatusCodes.Status200OK, "List of failures", typeof(IEnumerable<FailureResource>))]
+    public async Task<IActionResult> GetFailuresByErrorType(string errorType)
+    {
+        var getAllFailuresByErrorTypeQuery = new GetAllFailuresByErrorTypeQuery(errorType);
+        var failures = await failureQueryService.Handle(getAllFailuresByErrorTypeQuery);
+        var failureResources = failures.Select(FailureResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(failureResources);
     }
 }

@@ -17,7 +17,7 @@ public class AnalyticsController(
     IAnalyticCommandService analyticCommandService,
     IAnalyticQueryService analyticQueryService) : ControllerBase
 {
-    [HttpGet("{analyticId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Analytic by Id",
         Description = "Returns a Analytic by its unique identifier",
@@ -33,7 +33,7 @@ public class AnalyticsController(
         return Ok(resource);
     }
 
-    [HttpGet("vehicle/{vehicleId:int}")]
+    [HttpGet("vehicles/{id:int}")]
     [SwaggerOperation(
         Summary = "Get Analytic by Id",
         Description = "Returns a Analytic by its vehicle identifier",
@@ -50,7 +50,7 @@ public class AnalyticsController(
     }
 
 
-    [HttpGet("analytics")]
+    [HttpGet]
     [SwaggerOperation(
         Summary = "Get All Analytics",
         Description = "Returns a list of all Analytics.",
@@ -81,7 +81,7 @@ public class AnalyticsController(
         return new CreatedResult(string.Empty, analyticResource);
     }
 
-    [HttpPut("{analyticId:int}")]
+    [HttpPut("{id:int}")]
     [SwaggerOperation(
         Summary = "Update a Analytic by Id",
         Description = "Updates an existing Analytic and returns the updated Analytic Resource.",
@@ -98,7 +98,7 @@ public class AnalyticsController(
         return Ok(analyticResource);
     }
 
-    [HttpPut("vehicles/{vehicleId:int}")]
+    [HttpPut("vehicles/{id:int}")]
     [SwaggerOperation(
         Summary = "Update an Analytic by VehicleId",
         Description = "Updates the Analytic for a specific vehicle",
