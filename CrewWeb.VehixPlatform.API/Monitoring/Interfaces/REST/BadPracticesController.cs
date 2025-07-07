@@ -1,5 +1,5 @@
 using System.Net.Mime;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Resources;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
@@ -12,16 +12,14 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST;
 [Route("api/v1/bad-practices")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Bad Practices Endpoints")]
-
 public class BadPracticesController(
     IBadPracticeCommandService badPracticeCommandService,
     IBadPracticeQueryService badPracticeQueryService) : ControllerBase
 {
-
     /// <summary>
     /// Gets a Bad Practice by its unique identifier.
     /// </summary>
-    /// <param name="badPracticeId"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}")]
     [SwaggerOperation(
@@ -30,9 +28,9 @@ public class BadPracticesController(
         OperationId = "GetBadPracticeById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Category found", typeof(BadPracticeResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Category not found")]
-    public async Task<IActionResult> GetBadPracticeById(int badPracticeId)
+    public async Task<IActionResult> GetBadPracticeById(int id)
     {
-        var getBadPracticeByIdQuery = new GetBadPracticeByIdQuery(badPracticeId);
+        var getBadPracticeByIdQuery = new GetBadPracticeByIdQuery(id);
         var badPractice = await badPracticeQueryService.Handle(getBadPracticeByIdQuery);
         if (badPractice is null) return NotFound();
         var resource = BadPracticeResourceFromEntityAssembler.ToResourceFromEntity(badPractice);
@@ -56,8 +54,8 @@ public class BadPracticesController(
             .Select(BadPracticeResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(badPracticeResources);
     }
-    
-    
+
+
     /// <summary>
     /// Creates a new Bad Practice and returns the created Bad Practice resource.
     /// </summary>
@@ -76,7 +74,7 @@ public class BadPracticesController(
         var badPractice = await badPracticeCommandService.Handle(createBadPracticeCommand);
         if (badPractice is null) return BadRequest("Bad Practice could not be created.");
         var badPracticeResource = BadPracticeResourceFromEntityAssembler.ToResourceFromEntity(badPractice);
-        return CreatedAtAction(nameof(GetBadPracticeById), new { badPracticeId = badPracticeResource.Id }, badPracticeResource);
+        return new CreatedResult(string.Empty, badPracticeResource);
+
     }
-    
 }

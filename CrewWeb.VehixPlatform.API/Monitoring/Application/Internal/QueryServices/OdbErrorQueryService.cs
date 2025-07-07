@@ -1,5 +1,5 @@
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Entities;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 
@@ -9,7 +9,7 @@ public class OdbErrorQueryService(IOdbErrorRepository odbErrorRepository) : IOdb
 {
     public async Task<OdbError?> Handle(GetOdbErrorByIdQuery query)
     {
-        return await odbErrorRepository.FindByIdAsync(query.OdbErrorId);
+        return await odbErrorRepository.FindByIdAsync(query.Id);
     }
 
     public async Task<IEnumerable<OdbError>> Handle(GetAllOdbErrorsQuery query)

@@ -1,5 +1,5 @@
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Entities;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 
 namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
 

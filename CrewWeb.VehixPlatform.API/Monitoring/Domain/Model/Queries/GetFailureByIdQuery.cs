@@ -1,3 +1,3 @@
-namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Queries;
+namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 
 public record GetFailureByIdQuery(int FailureId);

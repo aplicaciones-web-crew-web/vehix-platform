@@ -1,6 +1,5 @@
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Commands;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Entities;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 
 namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Aggregates;
 
