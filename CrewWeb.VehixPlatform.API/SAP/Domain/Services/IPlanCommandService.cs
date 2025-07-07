@@ -14,5 +14,5 @@ public interface IPlanCommandService
     /// </summary>
     /// <param name="command"></param>
     /// <returns></returns>
-    public Task<Plan> Handle(CreatePlanCommand command);
+    public Task<Plan?> Handle(CreatePlanCommand command);
 }
