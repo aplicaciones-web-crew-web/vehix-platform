@@ -81,9 +81,9 @@ public class AnalyticsController(
         return new CreatedResult(string.Empty, analyticResource);
     }
 
-    [HttpPut]
+    [HttpPut("{analyticId:int}")]
     [SwaggerOperation(
-        Summary = "Update a Analytic",
+        Summary = "Update a Analytic by Id",
         Description = "Updates an existing Analytic and returns the updated Analytic Resource.",
         OperationId = "UpdateAnalytic")]
     [SwaggerResponse(StatusCodes.Status200OK, "Analytic updated successfully", typeof(AnalyticResource))]

@@ -31,6 +31,11 @@ public class AnalyticCommandService(
             command.Refrigeration < 0 || command.Steering < 0 || command.Suspension < 0 || command.Transmission < 0)
             throw new GeneralException("The systems values cannot be negative", "VALIDATION");
 
+        if (command.Brake > 100 || command.Electrical > 100 || command.Engine > 100 || command.Fuel > 100 ||
+            command.Refrigeration > 100 || command.Steering > 100 || command.Suspension > 100 ||
+            command.Transmission > 100)
+            throw new GeneralException("The systems values cannot be greater than 100", "VALIDATION");
+
         // Process the command to create a new analytic
         var analytic = new Analytic(command);
         await analyticRepository.AddAsync(analytic);
@@ -88,11 +93,11 @@ public class AnalyticCommandService(
 
     public async Task<Analytic?> Handle(UpdateAnalyticByVehicleIdCommand command)
     {
-        var analyticExists = await analyticRepository.ExistByVehicleId(command.VehicleId);
-        if (!analyticExists)
+        var analytic = await analyticRepository.GetByVehicleId(command.VehicleId);
+
+        if (analytic is null)
             throw new GeneralException("The Analytic does not exist for the given Vehicle Id", "NOT_FOUND");
 
-        // Validate system values
         if (command.Brake < 0 || command.Electrical < 0 || command.Engine < 0 || command.Fuel < 0 ||
             command.Refrigeration < 0 || command.Steering < 0 || command.Suspension < 0 || command.Transmission < 0)
             throw new GeneralException("The systems values cannot be negative", "VALIDATION");
@@ -102,10 +107,18 @@ public class AnalyticCommandService(
             command.Transmission > 100)
             throw new GeneralException("The systems values cannot be greater than 100", "VALIDATION");
 
-        // Process the command to update the analytic by vehicle Id
-        var analytic = new Analytic(command);
+        analytic.Engine = command.Engine;
+        analytic.Transmission = command.Transmission;
+        analytic.Brake = command.Brake;
+        analytic.Electrical = command.Electrical;
+        analytic.Steering = command.Steering;
+        analytic.Suspension = command.Suspension;
+        analytic.Fuel = command.Fuel;
+        analytic.Refrigeration = command.Refrigeration;
+
         analyticRepository.Update(analytic);
         await unitOfWork.CompleteAsync();
+
         await domainEventPublisher.PublishAsync(new AnalyticUpdatedEvent(
             analytic.VehicleId,
             analytic.Brake,
@@ -117,6 +130,7 @@ public class AnalyticCommandService(
             analytic.Suspension,
             analytic.Transmission
         ));
+
         return analytic;
     }
 }
