@@ -19,6 +19,11 @@ using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Configuration;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.OutboundServices;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
+using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
+using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.SAP.Domain.Repositories;
@@ -98,19 +103,22 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Monitoring Bounded Context
 // Repositories
-/*
+
 builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
 builder.Services.AddScoped<IOdbErrorRepository, OdbErrorRepository>();
 builder.Services.AddScoped<IFailureRepository, FailureRepository>();
+builder.Services.AddScoped<IVehicleFailureRepository, VehicleFailureRepository>();
 //Commands Services
 builder.Services.AddScoped<IBadPracticeCommandService, BadPracticeCommandService>();
 builder.Services.AddScoped<IOdbErrorCommandService, OdbErrorCommandService>();
 builder.Services.AddScoped<IFailureCommandService, FailureCommandService>();
+builder.Services.AddScoped<IVehicleFailureCommandService, VehicleFailureCommandService>();
 //Queries Services
 builder.Services.AddScoped<IBadPracticeQueryService, BadPracticeQueryService>();
 builder.Services.AddScoped<IOdbErrorQueryService, OdbErrorQueryService>();
 builder.Services.AddScoped<IFailureQueryService, FailureQueryService>();
-*/
+builder.Services.AddScoped<IVehicleFailureQueryService, VehicleFailureQueryService>();
+
 // Identity and Access Management Bounded Context
 // Repositories
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();

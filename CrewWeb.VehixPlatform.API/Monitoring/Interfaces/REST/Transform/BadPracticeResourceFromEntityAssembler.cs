@@ -5,8 +5,11 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
 
 public static class BadPracticeResourceFromEntityAssembler
 {
-    public static BadPracticeResource ToResourceFromEntity(BadPractice badPractice)
+    public static BadPracticeResource ToResourceFromEntity(BadPractice entity)
     {
-        return new BadPracticeResource(badPractice.Id, badPractice.DescriptionBadPractice);
+        return new BadPracticeResource(
+            entity.Id,
+            entity.DescriptionBadPractice
+        );
     }
 }

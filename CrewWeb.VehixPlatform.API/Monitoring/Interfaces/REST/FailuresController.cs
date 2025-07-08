@@ -77,18 +77,4 @@ public class FailuresController(
         var createdResource = FailureResourceFromEntityAssembler.ToResourceFromEntity(failure);
         return new CreatedResult(string.Empty, createdResource);
     }
-
-    [HttpGet("{error-type}/failures")]
-    [SwaggerOperation(
-        Summary = "Get Failures by Error Type",
-        Description = "Returns a list of failures associated with a specific error type",
-        OperationId = "GetFailuresByErrorType")]
-    [SwaggerResponse(StatusCodes.Status200OK, "List of failures", typeof(IEnumerable<FailureResource>))]
-    public async Task<IActionResult> GetFailuresByErrorType(string errorType)
-    {
-        var getAllFailuresByErrorTypeQuery = new GetAllFailuresByErrorType(errorType);
-        var failures = await failureQueryService.Handle(getAllFailuresByErrorTypeQuery);
-        var failureResources = failures.Select(FailureResourceFromEntityAssembler.ToResourceFromEntity);
-        return Ok(failureResources);
-    }
 }

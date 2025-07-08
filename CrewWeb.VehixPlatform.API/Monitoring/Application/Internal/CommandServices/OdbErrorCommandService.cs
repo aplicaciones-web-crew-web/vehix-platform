@@ -30,7 +30,7 @@ public class OdbErrorCommandService(
         if (!Enum.TryParse<EOdbCode>(command.Code, ignoreCase: true, out _))
             throw new GeneralException("The ODB Code must be valid", "VALIDATION");
 
-        if (!Enum.TryParse<EType>(command.Type, ignoreCase: true, out _))
+        if (!Enum.TryParse<EErrorType>(command.Type, ignoreCase: true, out _))
             throw new GeneralException("The Type of odb Error must be valid", "VALIDATION");
 
 

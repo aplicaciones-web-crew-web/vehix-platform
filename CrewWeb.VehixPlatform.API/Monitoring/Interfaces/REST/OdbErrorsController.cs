@@ -2,7 +2,6 @@ using System.Net.Mime;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Commands;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Model.Queries;
 using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.ValueObjects;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Resources;
 using CrewWeb.VehixPlatform.API.Monitoring.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;

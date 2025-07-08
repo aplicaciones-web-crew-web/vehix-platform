@@ -4,6 +4,6 @@ public record UpdateVehicleFailureCommand(
     int Id,
     int VehicleId,
     int FailureId,
-    DateTime Date,
-    string Status
+    string Status,
+    DateTime Date = new DateTime()
 );

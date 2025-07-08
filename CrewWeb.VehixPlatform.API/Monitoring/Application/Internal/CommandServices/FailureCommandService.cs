@@ -35,7 +35,7 @@ public class FailureCommandService(
             throw new GeneralException("Failure suggest solution cannot be empty", "VALIDATION");
 
         if (!Enum.TryParse<EUrgency>(command.Urgency, ignoreCase: true, out _))
-            throw new GeneralException("The Vehicle Brand must be valid", "VALIDATION");
+            throw new GeneralException("The Urgency Type be valid", "VALIDATION");
 
 
         // Process the command to create a new failure

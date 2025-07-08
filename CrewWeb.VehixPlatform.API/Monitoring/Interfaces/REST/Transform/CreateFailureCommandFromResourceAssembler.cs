@@ -7,6 +7,12 @@ public static class CreateFailureCommandFromResourceAssembler
 {
     public static CreateFailureCommand ToCommandFromResource(CreateFailureResource resource)
     {
-        return new CreateFailureCommand(resource.ObdErrorId, resource.BadPracticeId, resource.SuggestSolution);
+        return new CreateFailureCommand(
+            resource.Title,
+            resource.SuggestSolution,
+            resource.BadPracticeId,
+            resource.ObdErrorId,
+            resource.Urgency
+        );
     }
 }
