@@ -1,3 +1,4 @@
+using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
 using CrewWeb.VehixPlatform.API.Analytics.Application.Internal.CommandServices;
@@ -10,6 +11,11 @@ using CrewWeb.VehixPlatform.API.ASM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.ASM.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.ASM.Domain.Services;
 using CrewWeb.VehixPlatform.API.ASM.Infrastructure.Persistence.EFC.Repositories;
+using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
+using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
+using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
+using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
@@ -27,7 +33,6 @@ using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Exceptions;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
-using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -96,6 +101,38 @@ builder.Services.AddSwaggerGen(options =>
 // Shared Bounded Context
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Monitoring Bounded Context
+// Repositories
+builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
+builder.Services.AddScoped<IOdbErrorRepository, OdbErrorRepository>();
+builder.Services.AddScoped<IFailureRepository, FailureRepository>();
+//Commands Services
+builder.Services.AddScoped<IBadPracticeCommandService, BadPracticeCommandService>();
+builder.Services.AddScoped<IOdbErrorCommandService, OdbErrorCommandService>();
+builder.Services.AddScoped<IFailureCommandService, FailureCommandService>();
+//Queries Services
+builder.Services.AddScoped<IBadPracticeQueryService, BadPracticeQueryService>();
+builder.Services.AddScoped<IOdbErrorQueryService, OdbErrorQueryService>();
+builder.Services.AddScoped<IFailureQueryService, FailureQueryService>();
+
+// Identity and Access Management Bounded Context
+// Repositories
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+// Commands Services
+builder.Services.AddScoped<IRoleCommandService, RoleCommandService>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+// Queries Services
+builder.Services.AddScoped<IRoleQueryService, RoleQueryService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+// Authentication Services
+builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+
+builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
+
+
 //Subscription Bounded Context
 // Repositories
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
@@ -123,38 +160,6 @@ builder.Services.AddScoped<IVehicleCommandService, VehicleCommandService>();
 // Queries Services
 builder.Services.AddScoped<IVehicleQueryService, VehicleQueryService>();
 
-/*
-// Monitoring Bounded Context
-// Repositories
-builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
-builder.Services.AddScoped<IOdbErrorRepository, OdbErrorRepository>();
-builder.Services.AddScoped<IFailureRepository, FailureRepository>();
-//Commands Services
-builder.Services.AddScoped<IBadPracticeCommandService, BadPracticeCommandService>();
-builder.Services.AddScoped<IOdbErrorCommandService, OdbErrorCommandService>();
-builder.Services.AddScoped<IFailureCommandService, FailureCommandService>();
-//Queries Services
-builder.Services.AddScoped<IBadPracticeQueryService, BadPracticeQueryService>();
-builder.Services.AddScoped<IOdbErrorQueryService, OdbErrorQueryService>();
-builder.Services.AddScoped<IFailureQueryService, FailureQueryService>();
-*/
-// Identity and Access Management Bounded Context
-// Repositories
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-// Commands Services
-builder.Services.AddScoped<IRoleCommandService, RoleCommandService>();
-builder.Services.AddScoped<IUserCommandService, UserCommandService>();
-// Queries Services
-builder.Services.AddScoped<IRoleQueryService, RoleQueryService>();
-builder.Services.AddScoped<IUserQueryService, UserQueryService>();
-// Authentication Services
-builder.Services.AddScoped<IHashingService, HashingService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
-
-
-builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 
 // Add Mediator for CQRS
 builder.Services.AddCortexMediator(
@@ -164,6 +169,7 @@ builder.Services.AddCortexMediator(
         options.AddOpenCommandPipelineBehavior(typeof(LoggingCommandBehavior<>));
         //options.AddDefaultBehaviors();
     });
+
 
 var app = builder.Build();
 
@@ -177,14 +183,15 @@ using (var scope = app.Services.CreateScope())
         // Recreate the database on each run during development
         context.Database.EnsureDeleted();
     }
+
     context.Database.EnsureCreated();
 }
 
 // Use Swagger for API documentation if in development mode
 //if (app.Environment.IsDevelopment())
 //{
- //   app.UseSwagger();
- //   app.UseSwaggerUI();
+//   app.UseSwagger();
+//   app.UseSwaggerUI();
 //}
 
 app.UseSwagger();
@@ -193,7 +200,9 @@ app.UseSwaggerUI();
 // Apply CORS Policy
 app.UseCors("AllowAllPolicy");
 
+// To improve exception handling
 app.UseMiddleware<ExceptionMiddleware>();
+
 
 app.UseHttpsRedirection();
 

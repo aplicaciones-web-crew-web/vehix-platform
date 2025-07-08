@@ -16,16 +16,16 @@ public class RolesController(
     IRoleCommandService roleCommandService,
     IRoleQueryService roleQueryService) : ControllerBase
 {
-    [HttpGet("{roleId:int}")]
+    [HttpGet("{id:int}")]
     [SwaggerOperation(
         Summary = "Get Role by Id",
         Description = "Returns a role by its unique identifier.",
         OperationId = "GetRoleById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Role found", typeof(RoleResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Role not found")]
-    public async Task<IActionResult> GetRoleById([FromRoute] int roleId)
+    public async Task<IActionResult> GetRoleById([FromRoute] int id)
     {
-        var role = await roleQueryService.Handle(new GetRoleByIdQuery(roleId));
+        var role = await roleQueryService.Handle(new GetRoleByIdQuery(id));
         if (role is null) return NotFound();
         var resource = RoleResourceFromEntityAssembler.ToResourceFromEntity(role);
         return Ok(resource);

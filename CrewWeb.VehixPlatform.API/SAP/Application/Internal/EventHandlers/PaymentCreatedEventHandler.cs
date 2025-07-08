@@ -1,5 +1,5 @@
+using ACME.LearningCenterPlatform.API.Shared.Application.Internal.EventHandlers;
 using CrewWeb.VehixPlatform.API.SAP.Domain.Model.Events;
-using CrewWeb.VehixPlatform.API.Shared.Application.Internal.EventHandlers;
 
 namespace CrewWeb.VehixPlatform.API.SAP.Application.Internal.EventHandlers;
 
