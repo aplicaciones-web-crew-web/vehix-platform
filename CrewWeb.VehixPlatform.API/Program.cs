@@ -1,4 +1,3 @@
-using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
 using CrewWeb.VehixPlatform.API.Analytics.Application.Internal.CommandServices;
@@ -11,11 +10,6 @@ using CrewWeb.VehixPlatform.API.ASM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.ASM.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.ASM.Domain.Services;
 using CrewWeb.VehixPlatform.API.ASM.Infrastructure.Persistence.EFC.Repositories;
-using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.CommandServices;
-using CrewWeb.VehixPlatform.API.Monitoring.Application.Internal.QueryServices;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
-using CrewWeb.VehixPlatform.API.Monitoring.Domain.Services;
-using CrewWeb.VehixPlatform.API.Monitoring.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.IAM.Domain.Repositories;
@@ -33,6 +27,7 @@ using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Exceptions;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
+using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +98,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Monitoring Bounded Context
 // Repositories
+/*
 builder.Services.AddScoped<IBadPracticeRepository, BadPracticeRepository>();
 builder.Services.AddScoped<IOdbErrorRepository, OdbErrorRepository>();
 builder.Services.AddScoped<IFailureRepository, FailureRepository>();
@@ -114,7 +110,7 @@ builder.Services.AddScoped<IFailureCommandService, FailureCommandService>();
 builder.Services.AddScoped<IBadPracticeQueryService, BadPracticeQueryService>();
 builder.Services.AddScoped<IOdbErrorQueryService, OdbErrorQueryService>();
 builder.Services.AddScoped<IFailureQueryService, FailureQueryService>();
-
+*/
 // Identity and Access Management Bounded Context
 // Repositories
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();

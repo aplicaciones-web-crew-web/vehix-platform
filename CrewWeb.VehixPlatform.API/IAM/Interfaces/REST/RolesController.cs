@@ -57,6 +57,6 @@ public class RolesController(
         var role = await roleCommandService.Handle(command);
         if (role is null) return BadRequest("Role could not be created.");
         var roleResource = RoleResourceFromEntityAssembler.ToResourceFromEntity(role);
-        return CreatedAtAction(nameof(GetRoleById), new { roleId = roleResource.Id }, roleResource);
+        return new CreatedResult(string.Empty, roleResource);
     }
 }

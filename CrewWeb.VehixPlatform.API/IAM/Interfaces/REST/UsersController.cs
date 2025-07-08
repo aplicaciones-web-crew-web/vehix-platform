@@ -57,6 +57,6 @@ public class UsersController(
         var user = await userCommandService.Handle(command);
         if (user is null) return BadRequest("User could not be created.");
         var userResource = UserResourceFromEntityAssembler.ToResourceFromEntity(user);
-        return CreatedAtAction(nameof(GetUserById), new { userId = userResource.Id }, userResource);
+        return new CreatedResult(string.Empty, userResource);
     }
 }
