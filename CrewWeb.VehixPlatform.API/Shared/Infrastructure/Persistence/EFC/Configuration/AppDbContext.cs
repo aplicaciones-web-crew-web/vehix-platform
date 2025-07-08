@@ -1,7 +1,7 @@
 using CrewWeb.VehixPlatform.API.Analytics.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using CrewWeb.VehixPlatform.API.ASM.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Configuration.Extensions;
-using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Configuration.Extensions;
+/*using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Configuration.Extensions;*/
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +28,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.ApplyIamConfiguration();
         
         // Apply Configurations for the Subscription bounded context
-        builder.ApplySubscriptionsConfiguration();
+        //builder.ApplySubscriptionsConfiguration();
         
         // Apply configurations for the Analytics bounded context
         builder.ApplyAnalyticsConfiguration();

@@ -19,11 +19,13 @@ using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Tokens.JWT.Configuration;
 using CrewWeb.VehixPlatform.API.IAM.Application.Internal.OutboundServices;
 using CrewWeb.VehixPlatform.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+/*
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.CommandServices;
 using CrewWeb.VehixPlatform.API.SAP.Application.Internal.QueryServices;
 using CrewWeb.VehixPlatform.API.SAP.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.SAP.Domain.Services;
 using CrewWeb.VehixPlatform.API.SAP.Infrastructure.Persistence.EFC.Repositories;
+*/
 using CrewWeb.VehixPlatform.API.Shared.Domain.Exceptions;
 using CrewWeb.VehixPlatform.API.Shared.Domain.Repositories;
 using CrewWeb.VehixPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
@@ -128,7 +130,7 @@ builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("Toke
 
 builder.Services.AddScoped(typeof(ICommandPipelineBehavior<>), typeof(LoggingCommandBehavior<>));
 
-
+/*
 //Subscription Bounded Context
 // Repositories
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
@@ -139,7 +141,7 @@ builder.Services.AddScoped<IPaymentCommandService, PaymentCommandService>();
 // Queries Services
 builder.Services.AddScoped<IPlanQueryService, PlanQueryService>();
 builder.Services.AddScoped<IPaymentQueryService, PaymentQueryService>();
-
+*/
 // Anlytics Bounded Context
 // Repositories
 builder.Services.AddScoped<IAnalyticRepository, AnalyticRepository>();
