@@ -7,8 +7,6 @@ namespace CrewWeb.VehixPlatform.API.Monitoring.Domain.Repositories;
 public interface IFailureRepository : IBaseRepository<Failure>
 {
     Task<bool> ExistById(int id);
-
-    Task<IEnumerable<Failure>> FindByErrorType(string errorType);
-
-    Task<Failure?> FindByOdbErrorId(string odbErrorId);
+    
+    Task<Failure?> FindByOdbErrorId(int odbErrorId);
 }

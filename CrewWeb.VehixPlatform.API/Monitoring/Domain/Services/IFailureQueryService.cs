@@ -7,6 +7,4 @@ public interface IFailureQueryService
 {
     Task<Failure?> Handle(GetFailureById query);
     Task<IEnumerable<Failure>> Handle(GetAllFailures query);
-    
-    Task<IEnumerable<Failure>> Handle(GetAllFailuresByErrorType query);
 }

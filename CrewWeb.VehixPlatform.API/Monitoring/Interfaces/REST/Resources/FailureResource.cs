@@ -4,7 +4,7 @@ public record FailureResource(
     int Id,
     string Title,
     string SuggestSolution,
-    BadPracticeResource BadPractice,
-    OdbErrorResource OdbError,
-    string FailureType,
-    string FailureUrgency);
+    int BadPracticeId,
+    int OdbErrorId,
+    string Urgency
+);
