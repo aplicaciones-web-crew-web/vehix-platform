@@ -1,7 +1,6 @@
 using Cortex.Mediator.Commands;
 
-namespace ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
-
+namespace CrewWeb.VehixPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 public class LoggingCommandBehavior<TCommand> 
     : ICommandPipelineBehavior<TCommand> where TCommand : ICommand
 {
